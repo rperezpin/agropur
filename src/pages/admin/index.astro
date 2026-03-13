@@ -1,0 +1,36 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro'
+import { getContactStats, getApplicationStats } from '../../lib/db'
+
+const contactStats = getContactStats()
+const applicationStats = getApplicationStats()
+
+const metrics = [
+  { label: 'Total Contactos', value: contactStats.total, color: 'bg-blue-50 text-blue-700 border-blue-200' },
+  { label: 'Contactos No Leídos', value: contactStats.unread, color: 'bg-yellow-50 text-yellow-700 border-yellow-200' },
+  { label: 'Total Candidaturas', value: applicationStats.total, color: 'bg-green-50 text-green-700 border-green-200' },
+  { label: 'Candidaturas No Leídas', value: applicationStats.unread, color: 'bg-orange-50 text-orange-700 border-orange-200' },
+]
+---
+
+<AdminLayout title="Dashboard">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    {metrics.map((metric) => (
+      <div class={`rounded-xl p-6 border ${metric.color}`}>
+        <p class="text-3xl font-bold mb-1">{metric.value}</p>
+        <p class="text-sm opacity-75">{metric.label}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <a href="/admin/contactos" class="block bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+      <h2 class="font-heading font-semibold text-lg text-gray-dark mb-2">Mensajes de contacto</h2>
+      <p class="text-sm text-gray-mid">Ver todos los mensajes recibidos desde el formulario de contacto.</p>
+    </a>
+    <a href="/admin/candidaturas" class="block bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+      <h2 class="font-heading font-semibold text-lg text-gray-dark mb-2">Candidaturas</h2>
+      <p class="text-sm text-gray-mid">Ver todas las candidaturas y descargar CVs.</p>
+    </a>
+  </div>
+</AdminLayout>

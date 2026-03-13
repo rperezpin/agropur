@@ -1,0 +1,73 @@
+---
+import MobileMenu from './MobileMenu.tsx'
+
+const currentPath = Astro.url.pathname
+
+const navItems = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Digestato', href: '/digestato', badge: true },
+  { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
+  { label: 'Trabaja con Nosotros', href: '/trabaja-con-nosotros' },
+  { label: 'Contacto', href: '/contacto' },
+]
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 flex-shrink-0">
+        <img
+          src="/logo-agropur.jpeg"
+          alt="Agropur Centro Gestor S.L."
+          class="h-10 w-auto lg:h-12"
+        />
+        <div class="hidden sm:block">
+          <span class="block text-sm font-heading font-bold text-green-primary leading-tight">Agropur</span>
+          <span class="block text-xs text-gray-mid leading-tight">Centro Gestor S.L.</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Navegación principal">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'relative px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200',
+              currentPath === item.href
+                ? 'text-green-primary bg-green-primary/10'
+                : 'text-gray-dark hover:text-green-primary hover:bg-gray-brand',
+            ]}
+          >
+            {item.label}
+            {item.badge && (
+              <span class="ml-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-innovation-light text-innovation uppercase tracking-wide">
+                <span class="w-1.5 h-1.5 rounded-full bg-innovation animate-pulse" />
+                Nuevo
+              </span>
+            )}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA Desktop -->
+      <a
+        href="/contacto"
+        class="hidden lg:inline-flex items-center px-5 py-2.5 bg-blue-accent text-white text-sm font-semibold rounded-lg hover:bg-blue-accent/90 transition-colors duration-200 shadow-sm"
+      >
+        Solicitar información
+      </a>
+
+      <!-- Mobile Menu (Preact island) -->
+      <div class="lg:hidden">
+        <MobileMenu
+          client:load
+          navItems={navItems.map(item => ({ label: item.label, href: item.href, badge: item.badge || false }))}
+          currentPath={currentPath}
+        />
+      </div>
+    </div>
+  </div>
+</header>

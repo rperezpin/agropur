@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(npm i:*)",
+      "Bash(npm info:*)",
+      "Bash(python3 -c \"import sys,json; v=json.load\\(sys.stdin\\); print\\([x for x in v if x.startswith\\(''''5.''''\\)][-5:]\\)\")",
+      "Bash(node -e \"const n = require\\(''nodemailer''\\); console.log\\(Object.keys\\(n\\)\\)\")",
+      "Bash(node --input-type=module:*)",
+      "Bash(xargs sed:*)"
+    ],
+    "additionalDirectories": [
+      "/home/ruben/Proyectos/agropur/node_modules"
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+---
+const year = new Date().getFullYear()
+
+const navLinks = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Servicios', href: '/servicios' },
+  { label: 'Digestato', href: '/digestato' },
+  { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
+  { label: 'Trabaja con Nosotros', href: '/trabaja-con-nosotros' },
+  { label: 'Contacto', href: '/contacto' },
+]
+
+const legalLinks = [
+  { label: 'Aviso Legal', href: '/aviso-legal' },
+  { label: 'Política de Privacidad', href: '/privacidad' },
+  { label: 'Política de Cookies', href: '/cookies' },
+]
+---
+
+<footer class="bg-gray-dark text-gray-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      <!-- Empresa -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img
+            src="/logo-agropur.jpeg"
+            alt=""
+            class="h-10 w-auto rounded"
+          />
+          <span class="font-heading font-bold text-white text-lg">Agropur</span>
+        </div>
+        <p class="text-sm leading-relaxed mb-4">
+          Agropur Centro Gestor S.L. — Gestión integral de purines y digestato en Aragón y Navarra desde 2016.
+        </p>
+        <p class="text-xs text-gray-400">
+          Registro SANDACH: <strong class="text-green-mid">ESP22125010</strong>
+        </p>
+      </div>
+
+      <!-- Navegación -->
+      <div>
+        <h3 class="font-heading font-semibold text-white text-sm uppercase tracking-wider mb-4">Navegación</h3>
+        <ul class="space-y-2">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm hover:text-white transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal + Contacto -->
+      <div>
+        <h3 class="font-heading font-semibold text-white text-sm uppercase tracking-wider mb-4">Legal</h3>
+        <ul class="space-y-2 mb-6">
+          {legalLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm hover:text-white transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="font-heading font-semibold text-white text-sm uppercase tracking-wider mb-3">Contacto</h3>
+        <p class="text-sm">Ejea de los Caballeros, Zaragoza</p>
+        <a href="mailto:info@agropur.es" class="text-sm hover:text-white transition-colors block">info@agropur.es</a>
+        {/* TODO: Añadir teléfono cuando el cliente confirme */}
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="border-t border-gray-600 mt-10 pt-6 text-center">
+      <p class="text-xs text-gray-400">
+        &copy; {year} Agropur Centro Gestor S.L. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

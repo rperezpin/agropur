@@ -1,0 +1,23 @@
+---
+const stats = [
+  { number: '+8 años', label: 'De experiencia en el sector' },
+  { number: '3 comarcas', label: 'Hoya de Huesca, Cinco Villas, Rivera Alta' },
+  { number: 'SANDACH', label: 'Registro ESP22125010' },
+  { number: 'Tecnología', label: 'Tubos colgantes de última generación' },
+]
+---
+
+<section class="bg-blue-accent py-10 lg:py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+      {stats.map((stat, i) => (
+        <div class="text-center" data-aos="fade-up" data-aos-delay={i * 100}>
+          <p class="text-2xl lg:text-3xl font-heading font-bold text-white mb-1">
+            {stat.number}
+          </p>
+          <p class="text-sm text-white/80">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

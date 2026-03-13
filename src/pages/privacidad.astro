@@ -1,0 +1,64 @@
+---
+export const prerender = true
+
+import PublicLayout from '../layouts/PublicLayout.astro'
+import PageHero from '../components/shared/PageHero.astro'
+
+const title = 'Política de Privacidad | Agropur Centro Gestor S.L.'
+const description = 'Política de privacidad y protección de datos de Agropur Centro Gestor S.L.'
+---
+
+<PublicLayout title={title} description={description}>
+  <PageHero
+    title="Política de Privacidad"
+    subtitle="Cómo protegemos y gestionamos tus datos personales"
+    breadcrumbs={[{ label: 'Inicio', href: '/' }, { label: 'Privacidad' }]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-green prose-lg">
+      <h2>1. Responsable del tratamiento</h2>
+      <p>
+        De conformidad con el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo General de 27 de abril de 2016 (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), le informamos que los datos personales facilitados serán tratados por:
+      </p>
+      <ul>
+        <li><strong>Responsable:</strong> Agropur Centro Gestor S.L.</li>
+        <li><strong>Email:</strong> info@agropur.es</li>
+      </ul>
+
+      <h2>2. Finalidad del tratamiento</h2>
+      <p>Tratamos la información que nos facilita con las siguientes finalidades:</p>
+      <ul>
+        <li><strong>Contacto:</strong> Gestionar y resolver las consultas planteadas a través del formulario de contacto. Base legal: el consentimiento expreso del usuario.</li>
+        <li><strong>Candidaturas de empleo:</strong> Valorar su perfil profesional y hacerle partícipe en los procesos de selección de personal presentes y futuros. Base legal: el consentimiento expreso del candidato.</li>
+      </ul>
+
+      <h2>3. Conservación de los datos</h2>
+      <p>
+        Los datos proporcionados se conservarán durante el tiempo necesario para cumplir con la finalidad para la que fueron recabados o hasta que usted ejerza su derecho de supresión. En el caso de los currículums, se conservarán por un periodo máximo de dos años desde su recepción o última actualización.
+      </p>
+
+      <h2>4. Comunicación de datos</h2>
+      <p>
+        Sus datos no serán comunicados a terceros ajenos a Agropur Centro Gestor S.L., salvo obligación legal o cuando sea estrictamente necesario para la prestación de un servicio (por ejemplo, asesorías laborales/fiscales de la empresa).
+      </p>
+
+      <h2>5. Derechos del usuario</h2>
+      <p>
+        Cualquier persona tiene derecho a obtener confirmación sobre si en Agropur Centro Gestor S.L. estamos tratando datos personales que les conciernan, o no.
+      </p>
+      <p>Las personas interesadas tienen derecho a:</p>
+      <ul>
+        <li>Acceder a sus datos personales.</li>
+        <li>Solicitar la rectificación de los datos inexactos.</li>
+        <li>Solicitar su supresión cuando, entre otros motivos, los datos ya no sean necesarios para los fines que fueron recogidos.</li>
+        <li>Solicitar la limitación de su tratamiento.</li>
+        <li>Oponerse al tratamiento.</li>
+        <li>Portabilidad de los datos.</li>
+      </ul>
+      <p>
+        Para ejercer estos derechos, puede dirigirse por escrito a info@agropur.es, adjuntando una copia de su DNI o documento equivalente.
+      </p>
+    </div>
+  </section>
+</PublicLayout>

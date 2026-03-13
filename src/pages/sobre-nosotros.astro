@@ -1,0 +1,155 @@
+---
+export const prerender = true
+
+import PublicLayout from '../layouts/PublicLayout.astro'
+import PageHero from '../components/shared/PageHero.astro'
+
+const title = 'Sobre Nosotros | Agropur Centro Gestor S.L. desde 2016'
+const description = 'Empresa de gestión de purines con sede en Ejea de los Caballeros (Zaragoza). Experiencia desde 2016, registro SANDACH y cobertura en 3 comarcas.'
+
+const values = [
+  { title: 'Misión', color: 'border-green-primary', icon: '🎯', text: 'Gestionar las deyecciones porcinas de forma integral, eficiente y respetuosa con el medio ambiente, siendo un aliado de confianza para ganaderos y agricultores.' },
+  { title: 'Visión', color: 'border-blue-accent', icon: '🔭', text: 'Ser la empresa de referencia en gestión sostenible de purines en el nordeste de España, incorporando tecnologías innovadoras como el digestato para liderar la transición hacia una agricultura circular.' },
+  { title: 'Valores', color: 'border-blue-dark', icon: '💎', text: 'Rigor técnico, compromiso territorial, innovación responsable y honestidad. Con nuestros clientes y con el medio ambiente.' },
+]
+
+const coreValues = [
+  { title: 'Rigor técnico', description: 'Hacemos las cosas bien, con los protocolos correctos y la documentación en regla.' },
+  { title: 'Compromiso territorial', description: 'Conocemos nuestro territorio y nos importa su futuro.' },
+  { title: 'Innovación responsable', description: 'Adoptamos nuevas tecnologías cuando están contrastadas y aportan valor real.' },
+  { title: 'Honestidad', description: 'Con nuestros clientes y con el medio ambiente.' },
+]
+---
+
+<PublicLayout title={title} description={description}>
+  <PageHero
+    title="Sobre Agropur"
+    subtitle="Conoce nuestra historia, misión y compromiso con el sector."
+    breadcrumbs={[{ label: 'Inicio', href: '/' }, { label: 'Sobre Nosotros' }]}
+  />
+
+  <!-- Our Story -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div data-aos="fade-right">
+          <h2 class="text-3xl font-heading font-semibold text-green-primary mb-6">Nuestra Historia</h2>
+          <p class="text-gray-dark leading-relaxed mb-4">
+            Agropur Centro Gestor S.L. nació en 2016 con un objetivo claro: ofrecer a ganaderos y agricultores de Aragón y Navarra una solución profesional, legal y eficiente para la gestión colectiva de purines.
+          </p>
+          <p class="text-gray-dark leading-relaxed">
+            Lo que comenzó como una iniciativa local ha crecido hasta convertirse en un servicio de referencia en las comarcas de Hoya de Huesca, Cinco Villas y Rivera Alta de Navarra.
+          </p>
+        </div>
+        <div class="flex justify-center" data-aos="fade-left">
+          <img
+            src="/images/equipo.png"
+            alt="Equipo de Agropur Centro Gestor"
+            class="rounded-2xl shadow-md w-full max-w-sm object-cover aspect-[4/3]"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission, Vision, Values -->
+  <section class="py-16 lg:py-20 bg-gray-brand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {values.map((item, i) => (
+          <div class={`bg-white rounded-xl p-8 shadow-sm border-t-4 ${item.color}`} data-aos="fade-up" data-aos-delay={i * 100}>
+            <div class="text-4xl mb-4">{item.icon}</div>
+            <h3 class="text-xl font-heading font-semibold text-black-soft mb-3">{item.title}</h3>
+            <p class="text-gray-mid leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values List -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
+        Nuestros Valores
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        {coreValues.map((value, i) => (
+          <div class="flex gap-4" data-aos="fade-up" data-aos-delay={i * 100}>
+            <div class="w-10 h-10 rounded-full bg-green-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="text-green-primary font-bold">{i + 1}</span>
+            </div>
+            <div>
+              <h3 class="font-heading font-semibold text-black-soft mb-1">{value.title}</h3>
+              <p class="text-sm text-gray-mid">{value.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Geographic Coverage -->
+  <section class="py-16 lg:py-20 bg-gray-brand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
+        Zona de cobertura
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div class="space-y-4" data-aos="fade-right">
+          {[
+            { name: 'Hoya de Huesca', desc: 'Zona norte — provincia de Huesca.' },
+            { name: 'Cinco Villas', desc: 'Zona oeste de Zaragoza — sede en Ejea de los Caballeros.' },
+            { name: 'Rivera Alta de Navarra', desc: 'Sur de Navarra — límite navarro-aragonés.' },
+          ].map((comarca) => (
+            <div class="flex gap-4 bg-white rounded-xl p-5 shadow-sm">
+              <div class="w-10 h-10 rounded-full bg-green-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-green-primary">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-heading font-semibold text-black-soft">{comarca.name}</h3>
+                <p class="text-sm text-gray-mid">{comarca.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="flex justify-center" data-aos="fade-left">
+          <div class="w-full max-w-sm">
+            <img
+              src="/images/campo.png"
+              alt="Campo agrícola en la zona de cobertura de Agropur"
+              class="rounded-2xl shadow-md w-full object-cover aspect-[4/3]"
+              loading="lazy"
+            />
+            <p class="text-center text-sm text-gray-mid mt-3">
+              Sede en <strong class="text-green-primary">Ejea de los Caballeros</strong>, Zaragoza
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl mx-auto bg-white rounded-xl p-8 lg:p-12 shadow-sm border-2 border-green-primary" data-aos="fade-up">
+        <div class="text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-green-primary mx-auto mb-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+          </svg>
+          <h3 class="text-2xl font-heading font-bold text-green-primary mb-2">Registro SANDACH</h3>
+          <p class="text-3xl font-heading font-bold text-blue-accent mb-4">ESP22125010</p>
+          <p class="text-gray-mid leading-relaxed">
+            Cumplimos la normativa SANDACH (Subproductos Animales No Destinados al Consumo Humano). Este registro acredita que Agropur opera con todas las garantías legales y sanitarias exigidas por la legislación vigente.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PublicLayout>
