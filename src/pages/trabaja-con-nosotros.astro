@@ -1,0 +1,188 @@
+---
+export const prerender = true
+
+import PublicLayout from '../layouts/PublicLayout.astro'
+import JobApplicationForm from '../components/shared/JobApplicationForm.tsx'
+
+const title = 'Trabaja con Nosotros | Empleo en Gestión Agrícola | Agropur'
+const description = 'Agropur está creciendo y busca operarios de maquinaria, técnicos agronómicos y perfiles administrativos en Aragón y Navarra. Empresa estable con trabajo real.'
+
+const reasons = [
+  { title: 'Trabajo real y estable', description: 'No buscamos candidatos para una lista de espera. Tenemos carga de trabajo ahora.', highlight: true },
+  { title: 'Sector con futuro', description: 'La gestión medioambiental agrícola crece continuamente, impulsada por normativas cada vez más exigentes.' },
+  { title: 'Aprendizaje continuo', description: 'Trabajarás con tecnología avanzada. El digestato de purín es solo el principio.' },
+  { title: 'Impacto real', description: 'Tu trabajo contribuye directamente a la sostenibilidad del sector ganadero.' },
+  { title: 'Empresa cercana', description: 'Somos un equipo pequeño. Aquí cada persona importa y sus ideas se escuchan.' },
+]
+
+const profiles = [
+  {
+    title: 'Operario/a de Maquinaria Agrícola',
+    icon: '🚜',
+    description: 'Buscamos personas con experiencia o formación en maquinaria agrícola, disposición a trabajar en campo y carnet de conducir. Se valorará experiencia con cisternas y equipos de aplicación de purines.',
+  },
+  {
+    title: 'Técnico/a Agronómico o Ambiental',
+    icon: '🔬',
+    description: 'Titulación en Ingeniería Agronómica, Ciencias Ambientales o similar. Capacidad para elaborar planes de fertilización e interpretar análisis de laboratorio.',
+  },
+  {
+    title: 'Administrativo/a con Conocimiento del Sector',
+    icon: '📋',
+    description: 'Persona organizada, manejo de herramientas ofimáticas y capacidad para gestionar documentación oficial. Se valorará conocimiento del sector ganadero.',
+  },
+  {
+    title: 'Perfil Junior con Ganas de Aprender',
+    icon: '🌱',
+    description: 'No tienes experiencia pero tienes ganas de trabajar en el campo y aprender. En Agropur formamos a las personas con potencial.',
+    badge: true,
+  },
+]
+
+const steps = [
+  { number: '1', title: 'Envía tu CV', description: 'Rellena el formulario y adjunta tu CV' },
+  { number: '2', title: 'Te contactamos', description: 'Nos ponemos en contacto (normalmente en menos de 72h)' },
+  { number: '3', title: 'Incorporación', description: 'Entrevista y, si hay encaje, incorporación' },
+]
+---
+
+<PublicLayout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      "title": "Operario/a de Maquinaria Agrícola",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Agropur Centro Gestor S.L.",
+        "sameAs": "https://www.agropur.es"
+      },
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ejea de los Caballeros",
+          "addressRegion": "Zaragoza",
+          "addressCountry": "ES"
+        }
+      },
+      "employmentType": "FULL_TIME",
+      "description": "Búsqueda continua de operarios/as para gestión de maquinaria agrícola."
+    })} />
+  </Fragment>
+
+  <!-- Hero -->
+  <section class="relative min-h-[60vh] flex items-center bg-gray-dark overflow-hidden">
+    <div class="absolute inset-0 bg-green-primary/10 pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-6" data-aos="fade-up">
+        Tenemos trabajo.
+        <span class="block text-blue-accent">Necesitamos personas.</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-white/85 max-w-2xl mb-8" data-aos="fade-up" data-aos-delay="100">
+        Agropur está creciendo y buscamos personas comprometidas que quieran formar parte de un proyecto real, con trabajo estable y futuro en el sector.
+      </p>
+      <a href="#perfiles" class="inline-flex items-center px-8 py-4 bg-blue-accent text-white font-semibold rounded-lg hover:bg-blue-accent/90 transition-all shadow-lg" data-aos="fade-up" data-aos-delay="200">
+        Ver perfiles abiertos ↓
+      </a>
+    </div>
+  </section>
+
+  <!-- Why Join -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
+        Por qué unirte a Agropur
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {reasons.map((reason, i) => (
+          <div
+            class={`rounded-xl p-6 ${reason.highlight ? 'bg-blue-accent/5 border-2 border-blue-accent' : 'bg-gray-brand border border-gray-200'}`}
+            data-aos="fade-up"
+            data-aos-delay={i * 100}
+          >
+            <h3 class={`text-lg font-heading font-semibold mb-2 ${reason.highlight ? 'text-blue-accent' : 'text-black-soft'}`}>
+              {reason.title}
+            </h3>
+            <p class="text-sm text-gray-mid leading-relaxed">{reason.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Profiles -->
+  <section id="perfiles" class="py-16 lg:py-20 bg-gray-brand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
+        Perfiles abiertos
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {profiles.map((profile, i) => (
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 relative" data-aos="fade-up" data-aos-delay={i * 100}>
+            {profile.badge && (
+              <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-innovation-light text-innovation text-xs font-bold uppercase">
+                Sin experiencia OK
+              </span>
+            )}
+            <div class="text-4xl mb-3">{profile.icon}</div>
+            <h3 class="text-lg font-heading font-semibold text-black-soft mb-2">{profile.title}</h3>
+            <p class="text-sm text-gray-mid leading-relaxed mb-4">{profile.description}</p>
+            <a href="#formulario" class="text-sm font-medium text-blue-accent hover:underline">
+              Me interesa →
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Selection Process -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
+        Proceso de selección
+      </h2>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12">
+        {steps.map((step, i) => (
+          <div class="flex flex-col items-center text-center relative" data-aos="fade-up" data-aos-delay={i * 150}>
+            <div class="w-16 h-16 rounded-full bg-green-primary text-white flex items-center justify-center text-2xl font-heading font-bold mb-4">
+              {step.number}
+            </div>
+            <h3 class="font-heading font-semibold text-black-soft mb-1">{step.title}</h3>
+            <p class="text-sm text-gray-mid max-w-xs">{step.description}</p>
+            {i < steps.length - 1 && (
+              <svg class="hidden md:block absolute -right-6 lg:-right-8 top-8 w-6 h-6 text-blue-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section id="formulario" class="py-16 lg:py-20 bg-gray-brand">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-4" data-aos="fade-up">
+        Envía tu candidatura
+      </h2>
+      <p class="text-gray-mid text-center mb-8" data-aos="fade-up" data-aos-delay="100">
+        Rellena el formulario y adjunta tu CV en PDF.
+      </p>
+      <div data-aos="fade-up" data-aos-delay="200">
+        <JobApplicationForm client:visible />
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-lg text-gray-dark italic" data-aos="fade-up">
+        ¿No encajas en ninguno de los perfiles? Mándanos tu CV igualmente. Si tienes ganas de trabajar con nosotros, buscamos la manera.
+      </p>
+    </div>
+  </section>
+</PublicLayout>

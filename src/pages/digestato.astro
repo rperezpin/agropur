@@ -1,0 +1,154 @@
+---
+export const prerender = true
+
+import PublicLayout from '../layouts/PublicLayout.astro'
+import PageHero from '../components/shared/PageHero.astro'
+
+const title = 'Digestato de Purín: Fertilización Orgánica Avanzada | Agropur'
+const description = 'Agropur es pionera en el trabajo con digestato de purín en Aragón. Ventajas frente al purín convencional, impacto medioambiental y cómo beneficiarte.'
+
+const comparison = [
+  { feature: 'Estabilidad', purin: 'Variable', digestato: 'Alta y homogénea' },
+  { feature: 'Olor', purin: 'Intenso', digestato: 'Reducido significativamente' },
+  { feature: 'Patógenos', purin: 'Presentes', digestato: 'Reducidos drásticamente' },
+  { feature: 'Asimilación de nutrientes', purin: 'Lenta', digestato: 'Más rápida y eficiente' },
+  { feature: 'Aplicabilidad', purin: 'Estacional', digestato: 'Mayor flexibilidad' },
+  { feature: 'Impacto en suelo', purin: 'Puede acidificar', digestato: 'Más neutro' },
+]
+
+const impacts = [
+  { icon: '🌱', title: 'Economía circular', description: 'Los residuos de la granja se convierten en energía y en un recurso agronómico de valor.' },
+  { icon: '🌍', title: 'Menos emisiones', description: 'Menor huella de carbono en comparación con el manejo convencional de purines.' },
+  { icon: '🌾', title: 'Suelos saludables', description: 'Menos dependencia de fertilizantes sintéticos y suelos más saludables a largo plazo.' },
+]
+---
+
+<PublicLayout title={title} description={description}>
+  <!-- Hero -->
+  <section class="relative bg-green-primary py-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-[#1a3317]/60 pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="mb-4" aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-sm text-white/70">
+          <li><a href="/" class="hover:text-white transition-colors">Inicio</a></li>
+          <li><span aria-hidden="true">›</span></li>
+          <li class="text-white">Digestato</li>
+        </ol>
+      </nav>
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-bold mb-6 backdrop-blur-sm" data-aos="fade-up">
+        Pioneros en el sector
+      </span>
+      <h1 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4 max-w-3xl" data-aos="fade-up" data-aos-delay="100">
+        Digestato de Purín: El Futuro de la Fertilización Orgánica
+      </h1>
+      <p class="text-lg text-white/90 max-w-2xl" data-aos="fade-up" data-aos-delay="200">
+        Mientras otros gestionan purín, nosotros ya trabajamos con digestato. El futuro de la fertilización orgánica está aquí.
+      </p>
+    </div>
+  </section>
+
+  <!-- What is digestate -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div data-aos="fade-right">
+          <h2 class="text-3xl font-heading font-semibold text-green-primary mb-6">¿Qué es el digestato?</h2>
+          <p class="text-gray-dark leading-relaxed mb-4">
+            El digestato es el producto resultante del proceso de biodigestión anaerobia del purín. Cuando el purín pasa por un biodigestor, los microorganismos descomponen la materia orgánica en ausencia de oxígeno.
+          </p>
+          <p class="text-gray-dark leading-relaxed">
+            El resultado es biogás (energía) y digestato (un fertilizante orgánico de alta calidad). A diferencia del purín crudo, el digestato tiene una composición más estable, menor contenido de patógenos y sus nutrientes son más fácilmente asimilables por las plantas.
+          </p>
+        </div>
+        <div class="flex justify-center" data-aos="fade-left">
+          <div class="bg-innovation-light rounded-2xl p-8 w-full max-w-sm">
+            <div class="text-center">
+              <div class="w-20 h-20 mx-auto mb-4 bg-innovation/10 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-innovation">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+              </div>
+              <p class="font-heading font-bold text-innovation text-2xl mb-2">Purín → Biodigestor</p>
+              <p class="text-sm text-gray-dark">= Biogás + Digestato</p>
+              <p class="text-xs text-gray-mid mt-2">(Energía + Fertilizante de alta calidad)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="py-16 lg:py-20 bg-gray-brand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
+        Purín convencional vs. Digestato
+      </h2>
+      <div class="overflow-x-auto rounded-xl shadow-sm" data-aos="fade-up" data-aos-delay="100">
+        <table class="w-full bg-white">
+          <thead>
+            <tr class="bg-green-primary text-white">
+              <th class="px-6 py-4 text-left text-sm font-semibold">Característica</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold">Purín convencional</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold bg-innovation">Digestato</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td class="px-6 py-4 text-sm font-medium text-black-soft">{row.feature}</td>
+                <td class="px-6 py-4 text-sm text-gray-mid">{row.purin}</td>
+                <td class="px-6 py-4 text-sm font-medium text-innovation bg-innovation-light/50">{row.digestato}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Agropur Digestate -->
+  <section class="py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-6" data-aos="fade-up">
+        Por qué Agropur apuesta por el digestato
+      </h2>
+      <p class="text-gray-dark text-center max-w-3xl mx-auto leading-relaxed mb-12" data-aos="fade-up" data-aos-delay="100">
+        En Agropur creemos que la evolución del sector pasa por la mejora continua de los procesos. El digestato no es solo una moda: es la respuesta técnica a las exigencias medioambientales crecientes y a la necesidad de fertilización orgánica eficiente. Somos de las primeras empresas gestoras de la región en incorporar el trabajo con digestato.
+      </p>
+    </div>
+  </section>
+
+  <!-- Environmental Impact -->
+  <section class="py-16 lg:py-20 bg-innovation-light">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-black-soft text-center mb-10" data-aos="fade-up">
+        Impacto medioambiental
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        {impacts.map((impact, i) => (
+          <div class="text-center bg-white rounded-xl p-8 shadow-sm" data-aos="fade-up" data-aos-delay={i * 100}>
+            <div class="text-5xl mb-4">{impact.icon}</div>
+            <h3 class="text-lg font-heading font-semibold text-black-soft mb-2">{impact.title}</h3>
+            <p class="text-sm text-gray-mid leading-relaxed">{impact.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-green-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-heading font-bold text-white mb-4" data-aos="fade-up">
+        ¿Te interesa trabajar con digestato?
+      </h2>
+      <p class="text-lg text-white/85 mb-8 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        Contacta con nosotros y te explicamos cómo incorporar el digestato a tu explotación.
+      </p>
+      <a href="/contacto?servicio=Digestato" class="inline-flex items-center px-8 py-4 bg-white text-green-primary font-bold rounded-lg hover:bg-gray-brand transition-colors shadow-lg" data-aos="fade-up" data-aos-delay="200">
+        Contactar ahora
+      </a>
+    </div>
+  </section>
+</PublicLayout>

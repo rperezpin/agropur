@@ -1,0 +1,78 @@
+---
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+}
+
+const { title, description, ogImage = '/logo-agropur.jpeg' } = Astro.props
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/logo-agropur.jpeg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Agropur Centro Gestor S.L." />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <!-- Slot for page-specific head content (JSON-LD etc.) -->
+    <slot name="head" />
+  </head>
+  <body class="font-body text-gray-dark bg-white antialiased">
+    <slot name="header">
+      <Fragment>
+        {/* Default header — can be overridden */}
+        <slot name="default-header" />
+      </Fragment>
+    </slot>
+
+    <main>
+      <slot />
+    </main>
+
+    <slot name="footer" />
+
+    <!-- AOS JS -->
+    <script is:inline src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script is:inline>
+      AOS.init({
+        duration: 700,
+        once: true,
+        easing: 'ease-out-cubic',
+        offset: 60,
+        delay: 0,
+      })
+    </script>
+  </body>
+</html>
