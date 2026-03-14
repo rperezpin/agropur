@@ -64,6 +64,19 @@ const services = [
     ],
     reverse: true,
   },
+  {
+    id: 'gps',
+    title: 'Trazabilidad GPS',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>`,
+    description: 'Todos nuestros tractores y cisternas cuentan con sistemas GPS en tiempo real. Sabemos exactamente qué máquina está en cada parcela, cuándo llegó y cuánto purín aplicó.',
+    features: [
+      'Geolocalización en tiempo real de toda la maquinaria',
+      'Registro automático de parcelas trabajadas y tiempos de aplicación',
+      'Trazabilidad completa de cada movimiento de purín',
+      'Datos exportables para auditorías e inspecciones',
+    ],
+    reverse: false,
+  },
 ]
 ---
 
@@ -84,7 +97,7 @@ const services = [
       <!-- Service Cycle SVG -->
       <div class="mt-12 flex justify-center" data-aos="fade-up" data-aos-delay="100">
         <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-          {['Granja', 'Análisis', 'Transporte', 'Campo', 'Asesoramiento'].map((step, i) => (
+          {['Granja', 'Análisis', 'Transporte', 'Campo', 'GPS', 'Asesoramiento'].map((step, i) => (
             <div class="flex items-center gap-2 sm:gap-4">
               <div class="flex flex-col items-center">
                 <div class="w-14 h-14 rounded-full bg-green-primary/10 flex items-center justify-center text-green-primary font-heading font-bold text-lg">
@@ -92,7 +105,7 @@ const services = [
                 </div>
                 <span class="text-xs sm:text-sm font-medium text-gray-dark mt-2">{step}</span>
               </div>
-              {i < 4 && (
+              {i < 5 && (
                 <svg class="w-6 h-6 text-blue-accent hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
