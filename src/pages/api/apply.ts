@@ -1,10 +1,6 @@
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
-import { insertApplication } from '../../lib/db'
 import { sendApplicationNotification } from '../../lib/mailer'
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
-import { randomUUID } from 'node:crypto'
-import { extname, join } from 'node:path'
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 
@@ -45,12 +41,12 @@ export const POST: APIRoute = async ({ request }) => {
       )
     }
 
-    // Handle CV file
+    // Handle CV file — read into memory, attach to email
     const cvFile = formData.get('cv') as File | null
-    let cvPath: string | undefined
+    let cvBuffer: Buffer | undefined
+    let cvFilename: string | undefined
 
     if (cvFile && cvFile.size > 0) {
-      // Validate file type
       if (cvFile.type !== 'application/pdf') {
         return new Response(
           JSON.stringify({
@@ -61,7 +57,6 @@ export const POST: APIRoute = async ({ request }) => {
         )
       }
 
-      // Validate file size
       if (cvFile.size > MAX_FILE_SIZE) {
         return new Response(
           JSON.stringify({
@@ -72,42 +67,20 @@ export const POST: APIRoute = async ({ request }) => {
         )
       }
 
-      // Save file
-      const uploadDir = import.meta.env.UPLOAD_DIR || './uploads/cv'
-      if (!existsSync(uploadDir)) {
-        mkdirSync(uploadDir, { recursive: true })
-      }
-
-      const ext = extname(cvFile.name) || '.pdf'
-      const filename = `${randomUUID()}${ext}`
-      cvPath = join(uploadDir, filename)
-
       const arrayBuffer = await cvFile.arrayBuffer()
-      writeFileSync(cvPath, Buffer.from(arrayBuffer))
+      cvBuffer = Buffer.from(arrayBuffer)
+      cvFilename = cvFile.name || 'curriculum.pdf'
     }
 
-    // Save to database
-    insertApplication({
+    await sendApplicationNotification({
       nombre: result.data.nombre,
       email: result.data.email,
       telefono: result.data.telefono,
       perfil: result.data.perfil,
       experiencia: result.data.experiencia,
-      cv_path: cvPath,
+      cvBuffer,
+      cvFilename,
     })
-
-    // Send email notification
-    try {
-      await sendApplicationNotification({
-        nombre: result.data.nombre,
-        email: result.data.email,
-        telefono: result.data.telefono,
-        perfil: result.data.perfil,
-        experiencia: result.data.experiencia,
-      })
-    } catch (emailError) {
-      console.error('Error sending application email:', emailError)
-    }
 
     return new Response(
       JSON.stringify({ success: true }),

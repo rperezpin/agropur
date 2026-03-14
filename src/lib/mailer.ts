@@ -1,8 +1,15 @@
 import nodemailer from 'nodemailer'
 
+// Brevo SMTP settings:
+//   SMTP_HOST=smtp-relay.brevo.com
+//   SMTP_PORT=587
+//   SMTP_SECURE=false
+//   SMTP_USER=<tu_email_de_cuenta_brevo>
+//   SMTP_PASS=<tu_clave_smtp_brevo>  (Brevo > SMTP & API > SMTP Keys)
+
 const transporter = nodemailer.createTransport({
-  host: import.meta.env.SMTP_HOST || 'localhost',
-  port: Number(import.meta.env.SMTP_PORT) || 465,
+  host: import.meta.env.SMTP_HOST || 'smtp-relay.brevo.com',
+  port: Number(import.meta.env.SMTP_PORT) || 587,
   secure: import.meta.env.SMTP_SECURE === 'true',
   auth: {
     user: import.meta.env.SMTP_USER,
@@ -75,6 +82,8 @@ export interface ApplicationEmailData {
   telefono: string
   perfil: string
   experiencia?: string
+  cvBuffer?: Buffer
+  cvFilename?: string
 }
 
 export async function sendApplicationNotification(data: ApplicationEmailData): Promise<void> {
@@ -91,9 +100,15 @@ export async function sendApplicationNotification(data: ApplicationEmailData): P
       <p style="margin: 8px 0 0; white-space: pre-wrap;">${data.experiencia}</p>
     </div>
     ` : ''}
-    <p style="margin-top: 16px; color: #6b7280; font-size: 14px;">
-      El CV se ha guardado en el servidor. Accede al panel de administración para descargarlo.
+    ${data.cvBuffer ? `
+    <p style="margin-top: 16px; color: #4a7c3f; font-size: 14px;">
+      ✓ CV adjunto en este email.
     </p>
+    ` : `
+    <p style="margin-top: 16px; color: #6b7280; font-size: 14px;">
+      El candidato no ha adjuntado CV.
+    </p>
+    `}
   `
 
   await transporter.sendMail({
@@ -101,5 +116,8 @@ export async function sendApplicationNotification(data: ApplicationEmailData): P
     to: JOB_EMAIL,
     subject: `Nueva candidatura: ${data.nombre} — ${data.perfil}`,
     html: baseTemplate('Nueva candidatura recibida', content),
+    attachments: data.cvBuffer
+      ? [{ filename: data.cvFilename || 'curriculum.pdf', content: data.cvBuffer, contentType: 'application/pdf' }]
+      : [],
   })
 }
