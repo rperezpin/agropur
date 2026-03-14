@@ -8,7 +8,11 @@
       "Bash(python3 -c \"import sys,json; v=json.load\\(sys.stdin\\); print\\([x for x in v if x.startswith\\(''''5.''''\\)][-5:]\\)\")",
       "Bash(node -e \"const n = require\\(''nodemailer''\\); console.log\\(Object.keys\\(n\\)\\)\")",
       "Bash(node --input-type=module:*)",
-      "Bash(xargs sed:*)"
+      "Bash(xargs sed:*)",
+      "Bash(node -e \"console.log\\(require\\(''./node_modules/@astrojs/vercel/package.json''\\).version\\); console.log\\(require\\(''./node_modules/astro/package.json''\\).version\\)\")",
+      "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\(p.get\\(''''peerDependencies'''',{}\\)\\)\")",
+      "Bash(npm show:*)",
+      "Bash(python3 -c \"import json,sys; vs=json.load\\(sys.stdin\\); print\\([v for v in vs if v.startswith\\(''''8''''\\) or v.startswith\\(''''9''''\\)]\\)\")"
     ],
     "additionalDirectories": [
       "/home/ruben/Proyectos/agropur/node_modules"
