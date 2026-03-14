@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
-import { insertContact } from '../../lib/db'
 import { sendContactNotification } from '../../lib/mailer'
 
 const contactSchema = z.object({
@@ -30,15 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
       )
     }
 
-    // Save to database
-    insertContact(result.data)
-
-    // Send email notification (don't block response on email failure)
-    try {
-      await sendContactNotification(result.data)
-    } catch (emailError) {
-      console.error('Error sending contact email:', emailError)
-    }
+    await sendContactNotification(result.data)
 
     return new Response(
       JSON.stringify({ success: true }),

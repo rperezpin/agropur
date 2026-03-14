@@ -1,98 +1,17 @@
 ---
 import AdminLayout from '../../layouts/AdminLayout.astro'
-import { getContacts, markContactRead } from '../../lib/db'
-
-// Handle mark as read
-if (Astro.request.method === 'POST') {
-  const formData = await Astro.request.formData()
-  const id = formData.get('id')
-  if (id) {
-    markContactRead(Number(id))
-  }
-  return Astro.redirect('/admin/contactos')
-}
-
-const filter = Astro.url.searchParams.get('filter')
-const contacts = getContacts(filter === 'unread')
 ---
 
 <AdminLayout title="Contactos">
-  <!-- Filters -->
-  <div class="flex gap-3 mb-6">
-    <a
-      href="/admin/contactos"
-      class:list={['px-4 py-2 rounded-lg text-sm font-medium transition-colors', !filter ? 'bg-green-primary text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300']}
-    >
-      Todos ({contacts.length})
-    </a>
-    <a
-      href="/admin/contactos?filter=unread"
-      class:list={['px-4 py-2 rounded-lg text-sm font-medium transition-colors', filter === 'unread' ? 'bg-green-primary text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300']}
-    >
-      No leídos
-    </a>
+  <div class="bg-white rounded-xl p-8 border border-gray-200 text-center">
+    <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-blue-50 mb-4">
+      <svg class="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+      </svg>
+    </div>
+    <h2 class="font-heading font-semibold text-xl text-gray-dark mb-2">Mensajes de contacto</h2>
+    <p class="text-gray-mid text-sm max-w-sm mx-auto">
+      Cada mensaje del formulario web se reenvía automáticamente a <strong>info@agropur.es</strong> mediante Brevo.
+    </p>
   </div>
-
-  {contacts.length === 0 ? (
-    <div class="bg-white rounded-xl p-12 text-center border border-gray-200">
-      <p class="text-gray-mid">No hay mensajes de contacto todavía.</p>
-    </div>
-  ) : (
-    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
-            <tr>
-              <th class="px-4 py-3 text-left">Fecha</th>
-              <th class="px-4 py-3 text-left">Nombre</th>
-              <th class="px-4 py-3 text-left">Empresa</th>
-              <th class="px-4 py-3 text-left">Email</th>
-              <th class="px-4 py-3 text-left">Teléfono</th>
-              <th class="px-4 py-3 text-left">Servicio</th>
-              <th class="px-4 py-3 text-left">Mensaje</th>
-              <th class="px-4 py-3 text-left">Estado</th>
-              <th class="px-4 py-3 text-left">Acción</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-100">
-            {contacts.map((contact) => (
-              <tr class={contact.leido ? 'bg-white' : 'bg-yellow-50'}>
-                <td class="px-4 py-3 text-gray-500 whitespace-nowrap">{new Date(contact.created_at).toLocaleDateString('es-ES')}</td>
-                <td class="px-4 py-3 font-medium text-gray-900">{contact.nombre}</td>
-                <td class="px-4 py-3 text-gray-500">{contact.empresa || '—'}</td>
-                <td class="px-4 py-3"><a href={`mailto:${contact.email}`} class="text-green-primary hover:underline">{contact.email}</a></td>
-                <td class="px-4 py-3"><a href={`tel:${contact.telefono}`} class="text-green-primary hover:underline">{contact.telefono}</a></td>
-                <td class="px-4 py-3">{contact.servicio}</td>
-                <td class="px-4 py-3 max-w-xs">
-                  <details>
-                    <summary class="cursor-pointer text-gray-500 hover:text-gray-700 truncate">
-                      {contact.mensaje.slice(0, 50)}...
-                    </summary>
-                    <p class="mt-2 text-gray-700 whitespace-pre-wrap">{contact.mensaje}</p>
-                  </details>
-                </td>
-                <td class="px-4 py-3">
-                  {contact.leido ? (
-                    <span class="px-2 py-1 rounded-full text-xs bg-green-100 text-green-700">Leído</span>
-                  ) : (
-                    <span class="px-2 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700">Nuevo</span>
-                  )}
-                </td>
-                <td class="px-4 py-3">
-                  {!contact.leido && (
-                    <form method="POST">
-                      <input type="hidden" name="id" value={contact.id.toString()} />
-                      <button type="submit" class="text-xs px-3 py-1 bg-green-primary text-white rounded hover:bg-green-primary/80 transition-colors">
-                        Marcar leído
-                      </button>
-                    </form>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )}
 </AdminLayout>
