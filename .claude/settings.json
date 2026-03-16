@@ -12,7 +12,9 @@
       "Bash(node -e \"console.log\\(require\\(''./node_modules/@astrojs/vercel/package.json''\\).version\\); console.log\\(require\\(''./node_modules/astro/package.json''\\).version\\)\")",
       "Bash(python3 -c \"import json,sys; p=json.load\\(sys.stdin\\); print\\(p.get\\(''''peerDependencies'''',{}\\)\\)\")",
       "Bash(npm show:*)",
-      "Bash(python3 -c \"import json,sys; vs=json.load\\(sys.stdin\\); print\\([v for v in vs if v.startswith\\(''''8''''\\) or v.startswith\\(''''9''''\\)]\\)\")"
+      "Bash(python3 -c \"import json,sys; vs=json.load\\(sys.stdin\\); print\\([v for v in vs if v.startswith\\(''''8''''\\) or v.startswith\\(''''9''''\\)]\\)\")",
+      "Bash(node -e \"console.log\\(require\\(''''./node_modules/@astrojs/vercel/package.json''''\\).version\\)\")",
+      "Bash(npm audit:*)"
     ],
     "additionalDirectories": [
       "/home/ruben/Proyectos/agropur/node_modules"
