@@ -6,7 +6,6 @@ const currentPath = Astro.url.pathname
 const navItems = [
   { label: 'Inicio', href: '/' },
   { label: 'Servicios', href: '/servicios' },
-  { label: 'Digestato', href: '/digestato', badge: true },
   { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
   { label: 'Trabaja con Nosotros', href: '/trabaja-con-nosotros' },
   { label: 'Contacto', href: '/contacto' },
@@ -19,14 +18,10 @@ const navItems = [
       <!-- Logo -->
       <a href="/" class="flex items-center gap-3 flex-shrink-0">
         <img
-          src="/logo-agropur.jpeg"
+          src="/logo-agropur.png"
           alt="Agropur Centro Gestor S.L."
-          class="h-12 w-auto lg:h-14"
+          class="h-32 w-auto lg:h-40"
         />
-        <div class="hidden sm:block">
-          <span class="block text-sm font-heading font-bold text-green-primary leading-tight">Agropur</span>
-          <span class="block text-xs text-gray-mid leading-tight">Centro Gestor S.L.</span>
-        </div>
       </a>
 
       <!-- Desktop Nav -->
@@ -42,12 +37,6 @@ const navItems = [
             ]}
           >
             {item.label}
-            {item.badge && (
-              <span class="ml-1.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-innovation-light text-innovation uppercase tracking-wide">
-                <span class="w-1.5 h-1.5 rounded-full bg-innovation animate-pulse" />
-                Nuevo
-              </span>
-            )}
           </a>
         ))}
       </nav>
@@ -64,7 +53,7 @@ const navItems = [
       <div class="lg:hidden">
         <MobileMenu
           client:load
-          navItems={navItems.map(item => ({ label: item.label, href: item.href, badge: item.badge || false }))}
+          navItems={navItems.map(item => ({ label: item.label, href: item.href, badge: false }))}
           currentPath={currentPath}
         />
       </div>

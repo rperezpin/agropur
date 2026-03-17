@@ -1,4 +1,6 @@
 ---
+import MapComarcas from '../shared/MapComarcas.astro'
+
 const comarcas = [
   { name: 'Hoya de Huesca', description: 'Provincia de Huesca' },
   { name: 'Cinco Villas', description: 'Zona oeste de Zaragoza' },
@@ -8,7 +10,7 @@ const comarcas = [
 
 <section class="py-16 lg:py-20 bg-gray-brand">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
       <div data-aos="fade-right">
         <h2 class="text-3xl font-heading font-semibold text-green-primary mb-6">
           Nuestra zona de cobertura
@@ -34,19 +36,41 @@ const comarcas = [
       </div>
 
       <div class="flex justify-center" data-aos="fade-left">
-        <!-- Simplified geographic representation -->
-        <div class="bg-white rounded-2xl p-8 shadow-sm w-full max-w-sm">
-          <div class="text-center">
-            <div class="w-20 h-20 mx-auto mb-4 bg-green-primary/10 rounded-full flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-green-primary">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-              </svg>
-            </div>
-            <p class="font-heading font-semibold text-green-primary text-lg">Aragón y Navarra</p>
-            <p class="text-sm text-gray-mid mt-1">Sede en Ejea de los Caballeros</p>
-          </div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 w-full max-w-md">
+          <MapComarcas />
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Fotos a pantalla completa -->
+<div class="grid grid-cols-1 sm:grid-cols-2 h-72 lg:h-[26rem]" data-aos="fade-up">
+  <div class="relative overflow-hidden group">
+    <img
+      src="/images/balsa.jpeg"
+      alt="Vista aérea de balsa de purín con tractores Agropur y naves ganaderas"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 p-6 lg:p-8">
+      <p class="text-white font-heading font-semibold text-lg leading-snug">Gestión de balsa de purín</p>
+      <p class="text-white/70 text-sm mt-1">Trabajando en el territorio cada día</p>
+    </div>
+  </div>
+
+  <div class="relative overflow-hidden group">
+    <img
+      src="/images/tractor.jpeg"
+      alt="Tractor Agropur con apero de aplicación de purín en campo"
+      class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 p-6 lg:p-8">
+      <p class="text-white font-heading font-semibold text-lg leading-snug">Maquinaria propia Agropur</p>
+      <p class="text-white/70 text-sm mt-1">Aplicación directa en campo</p>
+    </div>
+  </div>
+</div>
