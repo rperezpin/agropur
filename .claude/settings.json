@@ -15,7 +15,11 @@
       "Bash(python3 -c \"import json,sys; vs=json.load\\(sys.stdin\\); print\\([v for v in vs if v.startswith\\(''''8''''\\) or v.startswith\\(''''9''''\\)]\\)\")",
       "Bash(node -e \"console.log\\(require\\(''''./node_modules/@astrojs/vercel/package.json''''\\).version\\)\")",
       "Bash(npm audit:*)",
-      "Bash(convert /home/ruben/Proyectos/agropur/public/logo-agropur.jpeg -fuzz 10% -transparent white /home/ruben/Proyectos/agropur/public/logo-agropur.png)"
+      "Bash(convert /home/ruben/Proyectos/agropur/public/logo-agropur.jpeg -fuzz 10% -transparent white /home/ruben/Proyectos/agropur/public/logo-agropur.png)",
+      "Bash(git -C /home/ruben/Proyectos/agropur show 153fcfb --name-only)",
+      "Bash(python3 -c \"import sys,json; v=json.load\\(sys.stdin\\); print\\(''''\\\\n''''.join\\(v[-10:]\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; v=json.load\\(sys.stdin\\); v9=[x for x in v if x.startswith\\(''''9.''''\\)]; print\\(''''\\\\n''''.join\\(v9[-5:]\\)\\)\")",
+      "Bash(git add:*)"
     ],
     "additionalDirectories": [
       "/home/ruben/Proyectos/agropur/node_modules"

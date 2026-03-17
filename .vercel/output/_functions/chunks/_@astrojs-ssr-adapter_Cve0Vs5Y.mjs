@@ -7,10 +7,11 @@ import buffer from 'node:buffer';
 import crypto$1 from 'node:crypto';
 import { Http2ServerResponse } from 'node:http2';
 import { f as fileExtension, j as joinPaths, s as slash, p as prependForwardSlash, r as removeTrailingForwardSlash, a as appendForwardSlash, b as isInternalPath, c as collapseDuplicateTrailingSlashes, h as hasFileExtension } from './path_De6Se6hL.mjs';
-import { m as matchPattern } from './remote_DVMROsal.mjs';
+import { m as matchPattern } from './index_D7crw23D.mjs';
 import { r as requestIs404Or500, i as isRequestServerIsland, n as notFound, a as normalizeTheLocale, b as redirectToFallback, c as redirectToDefaultLocale, e as requestHasLocale, d as defineMiddleware, S as SERVER_ISLAND_COMPONENT, f as SERVER_ISLAND_ROUTE, g as createEndpoint, R as RouteCache, s as sequence, h as findRouteToRewrite, v as validateAndDecodePathname, m as matchRoute, j as RenderContext, P as PERSIST_SYMBOL, k as getSetCookiesFromResponse } from './index_Cm1sGYEt.mjs';
 import { N as NOOP_MIDDLEWARE_FN } from './noop-middleware_B8W2bKB-.mjs';
-import 'fast-glob';
+import '@vercel/routing-utils';
+import 'deterministic-object-hash';
 import nodePath from 'node:path';
 
 function createI18nMiddleware(i18n, base, trailingSlash, format) {
@@ -1508,55 +1509,51 @@ apply();
 
 nodePath.posix.join;
 
-/**
- * The edge function calls the node server at /_render,
- * with the original path as the value of this header.
- */
-const ASTRO_PATH_HEADER = 'x-astro-path';
-const ASTRO_PATH_PARAM = 'x_astro_path';
-/**
- * The edge function calls the node server at /_render,
- * with the locals serialized into this header.
- */
-const ASTRO_LOCALS_HEADER = 'x-astro-locals';
-const ASTRO_MIDDLEWARE_SECRET_HEADER = 'x-astro-middleware-secret';
+const ASTRO_PATH_HEADER = "x-astro-path";
+const ASTRO_PATH_PARAM = "x_astro_path";
+const ASTRO_LOCALS_HEADER = "x-astro-locals";
+const ASTRO_MIDDLEWARE_SECRET_HEADER = "x-astro-middleware-secret";
 
-// Keep at the top
-const createExports = (manifest, { middlewareSecret, skewProtection }) => {
-    const app = new NodeApp(manifest);
-    const handler = async (req, res) => {
-        const url = new URL(`https://example.com${req.url}`);
-        const clientAddress = req.headers['x-forwarded-for'];
-        const localsHeader = req.headers[ASTRO_LOCALS_HEADER];
-        const middlewareSecretHeader = req.headers[ASTRO_MIDDLEWARE_SECRET_HEADER];
-        const realPath = req.headers[ASTRO_PATH_HEADER] ?? url.searchParams.get(ASTRO_PATH_PARAM);
-        if (typeof realPath === 'string') {
-            req.url = realPath;
-        }
-        let locals = {};
-        if (localsHeader) {
-            if (middlewareSecretHeader !== middlewareSecret) {
-                res.statusCode = 403;
-                res.end('Forbidden');
-                return;
-            }
-            locals =
-                typeof localsHeader === 'string' ? JSON.parse(localsHeader) : JSON.parse(localsHeader[0]);
-        }
-        // hide the secret from the rest of user code
-        delete req.headers[ASTRO_MIDDLEWARE_SECRET_HEADER];
-        // https://vercel.com/docs/deployments/skew-protection#supported-frameworks
-        if (skewProtection && process.env.VERCEL_SKEW_PROTECTION_ENABLED === '1') {
-            req.headers['x-deployment-id'] = process.env.VERCEL_DEPLOYMENT_ID;
-        }
-        const webResponse = await app.render(req, { addCookieHeader: true, clientAddress, locals });
-        await NodeApp.writeResponse(webResponse, res);
-    };
-    return { default: handler };
+const createExports = (manifest, {
+  middlewareSecret,
+  skewProtection
+}) => {
+  const app = new NodeApp(manifest);
+  const handler = async (req, res) => {
+    const url = new URL(`https://example.com${req.url}`);
+    const clientAddress = req.headers["x-forwarded-for"];
+    const localsHeader = req.headers[ASTRO_LOCALS_HEADER];
+    const middlewareSecretHeader = req.headers[ASTRO_MIDDLEWARE_SECRET_HEADER];
+    const realPath = req.headers[ASTRO_PATH_HEADER] ?? url.searchParams.get(ASTRO_PATH_PARAM);
+    if (typeof realPath === "string") {
+      req.url = realPath;
+    }
+    let locals = {};
+    if (localsHeader) {
+      if (middlewareSecretHeader !== middlewareSecret) {
+        res.statusCode = 403;
+        res.end("Forbidden");
+        return;
+      }
+      locals = typeof localsHeader === "string" ? JSON.parse(localsHeader) : JSON.parse(localsHeader[0]);
+    }
+    delete req.headers[ASTRO_MIDDLEWARE_SECRET_HEADER];
+    if (skewProtection && process.env.VERCEL_SKEW_PROTECTION_ENABLED === "1") {
+      req.headers["x-deployment-id"] = process.env.VERCEL_DEPLOYMENT_ID;
+    }
+    const webResponse = await app.render(req, {
+      addCookieHeader: true,
+      clientAddress,
+      locals
+    });
+    await NodeApp.writeResponse(webResponse, res);
+  };
+  return {
+    default: handler
+  };
 };
-// HACK: prevent warning
-// @astrojs-ssr-virtual-entry (22:23) "start" is not exported by "dist/serverless/entrypoint.js", imported by "@astrojs-ssr-virtual-entry".
-function start() { }
+function start() {
+}
 
 const serverEntrypointModule = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
