@@ -3,6 +3,7 @@ export const prerender = true
 
 import PublicLayout from '../layouts/PublicLayout.astro'
 import PageHero from '../components/shared/PageHero.astro'
+import MapComarcas from '../components/shared/MapComarcas.astro'
 
 const title = 'Sobre Nosotros | Agropur Centro Gestor S.L. desde 2016'
 const description = 'Empresa de gestión de purines con sede en Ejea de los Caballeros (Zaragoza). Experiencia desde 2016, registro SANDACH y cobertura en 3 comarcas.'
@@ -90,6 +91,25 @@ const coreValues = [
     </div>
   </section>
 
+  <!-- Foto de campo a pantalla completa -->
+  <div class="relative h-72 lg:h-96 overflow-hidden">
+    <img
+      src="/images/balsa.jpeg"
+      alt="Vista aérea de balsa de purín y naves ganaderas en Aragón"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"></div>
+    <div class="absolute inset-0 flex items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-white/80 text-sm font-medium uppercase tracking-widest mb-2">En el campo</p>
+        <p class="text-white font-heading font-semibold text-2xl lg:text-3xl max-w-md leading-snug">
+          Gestión profesional donde más importa: el territorio.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- Geographic Coverage -->
   <section class="py-16 lg:py-20 bg-gray-brand">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,21 +139,32 @@ const coreValues = [
         </div>
 
         <div class="flex justify-center" data-aos="fade-left">
-          <div class="w-full max-w-sm">
-            <img
-              src="/images/campo.png"
-              alt="Campo agrícola en la zona de cobertura de Agropur"
-              class="rounded-2xl shadow-md w-full object-cover aspect-[4/3]"
-              loading="lazy"
-            />
-            <p class="text-center text-sm text-gray-mid mt-3">
-              Sede en <strong class="text-green-primary">Ejea de los Caballeros</strong>, Zaragoza
-            </p>
+          <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 w-full">
+            <MapComarcas />
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Foto del tractor a pantalla completa -->
+  <div class="relative h-64 lg:h-80 overflow-hidden">
+    <img
+      src="/images/tractor.jpeg"
+      alt="Tractor Agropur listo para la aplicación de purín en campo"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent"></div>
+    <div class="absolute inset-0 flex items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-white font-heading font-semibold text-2xl lg:text-3xl max-w-xs leading-snug">
+          Maquinaria propia. Sin intermediarios.
+        </p>
+        <p class="text-white/70 text-sm mt-2">Flota de tractores con rótulo Agropur operando en las tres comarcas.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Certifications -->
   <section class="py-16 lg:py-20 bg-white">
