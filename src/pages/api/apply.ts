@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
 import { sendApplicationNotification } from '../../lib/mailer'
+import { verifyRecaptcha } from '../../lib/recaptcha'
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 
@@ -39,6 +40,20 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       )
+    }
+
+    const recaptchaToken = formData.get('recaptchaToken') as string | null
+    if (recaptchaToken) {
+      const captcha = await verifyRecaptcha(recaptchaToken)
+      if (!captcha.success) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            errors: [{ field: 'general', message: 'Verificación de seguridad fallida. Por favor, inténtalo de nuevo.' }],
+          }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        )
+      }
     }
 
     // Handle CV file — read into memory, attach to email

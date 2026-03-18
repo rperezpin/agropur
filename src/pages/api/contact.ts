@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
 import { sendContactNotification } from '../../lib/mailer'
+import { verifyRecaptcha } from '../../lib/recaptcha'
 
 const contactSchema = z.object({
   nombre: z.string().min(2, 'El nombre es obligatorio'),
@@ -9,6 +10,7 @@ const contactSchema = z.object({
   telefono: z.string().min(6, 'El teléfono es obligatorio'),
   servicio: z.string().min(1, 'Selecciona un servicio'),
   mensaje: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres'),
+  recaptchaToken: z.string().optional(),
 })
 
 export const POST: APIRoute = async ({ request }) => {
@@ -29,7 +31,22 @@ export const POST: APIRoute = async ({ request }) => {
       )
     }
 
-    await sendContactNotification(result.data)
+    const { recaptchaToken, ...formData } = result.data
+
+    if (recaptchaToken) {
+      const captcha = await verifyRecaptcha(recaptchaToken)
+      if (!captcha.success) {
+        return new Response(
+          JSON.stringify({
+            success: false,
+            errors: [{ field: 'general', message: 'Verificación de seguridad fallida. Por favor, inténtalo de nuevo.' }],
+          }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        )
+      }
+    }
+
+    await sendContactNotification(formData)
 
     return new Response(
       JSON.stringify({ success: true }),

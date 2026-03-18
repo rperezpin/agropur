@@ -6,6 +6,7 @@ import JobApplicationForm from '../components/shared/JobApplicationForm.tsx'
 
 const title = 'Trabaja con Nosotros | Empleo en Gestión Agrícola | Agropur'
 const description = 'Agropur está creciendo y busca operarios de maquinaria, técnicos agronómicos y perfiles administrativos en Aragón y Navarra. Empresa estable con trabajo real.'
+const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
 
 const reasons = [
   { title: 'Trabajo real y estable', description: 'No buscamos candidatos para una lista de espera. Tenemos carga de trabajo ahora.', highlight: true },
@@ -48,6 +49,9 @@ const steps = [
 
 <PublicLayout title={title} description={description}>
   <Fragment slot="head">
+    {recaptchaSiteKey && (
+      <script is:inline src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}></script>
+    )}
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "JobPosting",
