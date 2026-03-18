@@ -16,6 +16,26 @@ const services = [
   'Otro',
 ]
 
+const SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void
+      execute: (siteKey: string, options: { action: string }) => Promise<string>
+    }
+  }
+}
+
+async function getRecaptchaToken(action: string): Promise<string | null> {
+  if (!SITE_KEY || typeof window.grecaptcha === 'undefined') return null
+  return new Promise((resolve) => {
+    window.grecaptcha.ready(() => {
+      window.grecaptcha.execute(SITE_KEY, { action }).then(resolve).catch(() => resolve(null))
+    })
+  })
+}
+
 export default function ContactForm(): JSX.Element {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -56,10 +76,12 @@ export default function ContactForm(): JSX.Element {
 
     setStatus('loading')
     try {
+      const recaptchaToken = await getRecaptchaToken('contact')
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, recaptchaToken }),
       })
       const data = await res.json()
 
@@ -112,9 +134,14 @@ export default function ContactForm(): JSX.Element {
 
   return (
     <form onSubmit={handleSubmit} noValidate class="space-y-5">
-      {status === 'error' && (
+      {status === 'error' && !errors.general && (
         <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-700">
           Ha ocurrido un error. Por favor, inténtalo de nuevo.
+        </div>
+      )}
+      {errors.general && (
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-700">
+          {errors.general}
         </div>
       )}
 
@@ -167,6 +194,7 @@ export default function ContactForm(): JSX.Element {
 
       <p class="text-xs text-gray-400 text-center">
         Al enviar este formulario aceptas nuestra <a href="/privacidad" class="underline hover:text-gray-600">Política de Privacidad</a>.
+        Este sitio está protegido por reCAPTCHA.
       </p>
     </form>
   )

@@ -7,9 +7,15 @@ import ContactForm from '../components/shared/ContactForm.tsx'
 
 const title = 'Contacto | Agropur Centro Gestor S.L. — Ejea de los Caballeros'
 const description = 'Contacta con Agropur para gestión de purines, digestato y servicios agronómicos en Aragón y Navarra.'
+const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
 ---
 
 <PublicLayout title={title} description={description}>
+  <Fragment slot="head">
+    {recaptchaSiteKey && (
+      <script is:inline src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}></script>
+    )}
+  </Fragment>
   <PageHero
     title="Contacta con Nosotros"
     subtitle="Tanto si eres ganadero, agricultor, o simplemente quieres saber más sobre nuestros servicios, estamos aquí para ayudarte."

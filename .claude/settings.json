@@ -20,7 +20,10 @@
       "Bash(python3 -c \"import sys,json; v=json.load\\(sys.stdin\\); print\\(''''\\\\n''''.join\\(v[-10:]\\)\\)\")",
       "Bash(python3 -c \"import sys,json; v=json.load\\(sys.stdin\\); v9=[x for x in v if x.startswith\\(''''9.''''\\)]; print\\(''''\\\\n''''.join\\(v9[-5:]\\)\\)\")",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm ls:*)",
+      "Bash(node -e \"const v=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\); const arr=JSON.parse\\(v\\); console.log\\(arr.filter\\(x=>x.startsWith\\(''''6.''''\\)\\).slice\\(-5\\).join\\(''''\\\\n''''\\)\\)\")",
+      "Bash(grep -r \"recaptcha\\\\|captcha\\\\|turnstile\\\\|grecaptcha\" /home/ruben/Proyectos/agropur/src --include=*.ts --include=*.tsx --include=*.astro)"
     ],
     "additionalDirectories": [
       "/home/ruben/Proyectos/agropur/node_modules"

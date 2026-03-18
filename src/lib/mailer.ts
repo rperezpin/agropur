@@ -1,25 +1,43 @@
-import nodemailer from 'nodemailer'
+const BREVO_API_KEY = import.meta.env.BREVO_API_KEY
+const CONTACT_EMAIL_TO = import.meta.env.CONTACT_EMAIL_TO || 'info@agropur.es'
+const CONTACT_EMAIL_FROM = import.meta.env.CONTACT_EMAIL_FROM || 'info@rpidev.com'
+const JOB_EMAIL = import.meta.env.JOB_EMAIL || CONTACT_EMAIL_TO
 
-// Brevo SMTP settings:
-//   SMTP_HOST=smtp-relay.brevo.com
-//   SMTP_PORT=587
-//   SMTP_SECURE=false
-//   SMTP_USER=<tu_email_de_cuenta_brevo>
-//   SMTP_PASS=<tu_clave_smtp_brevo>  (Brevo > SMTP & API > SMTP Keys)
+async function sendBrevoEmail(options: {
+  toEmail: string
+  toName?: string
+  fromEmail: string
+  fromName: string
+  subject: string
+  html: string
+  attachment?: { name: string; content: string }
+}): Promise<void> {
+  const body: Record<string, unknown> = {
+    sender: { name: options.fromName, email: options.fromEmail },
+    to: [{ email: options.toEmail, name: options.toName || options.toEmail }],
+    subject: options.subject,
+    htmlContent: options.html,
+  }
 
-const transporter = nodemailer.createTransport({
-  host: import.meta.env.SMTP_HOST || 'smtp-relay.brevo.com',
-  port: Number(import.meta.env.SMTP_PORT) || 587,
-  secure: import.meta.env.SMTP_SECURE === 'true',
-  auth: {
-    user: import.meta.env.SMTP_USER,
-    pass: import.meta.env.SMTP_PASS,
-  },
-})
+  if (options.attachment) {
+    body.attachment = [{ name: options.attachment.name, content: options.attachment.content }]
+  }
 
-const CONTACT_EMAIL = import.meta.env.CONTACT_EMAIL || 'info@agropur.es'
-const JOB_EMAIL = import.meta.env.JOB_EMAIL || 'rrhh@agropur.es'
-const FROM_EMAIL = import.meta.env.SMTP_USER || 'info@agropur.es'
+  const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'api-key': BREVO_API_KEY,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+
+  if (!res.ok) {
+    const err = await res.text()
+    throw new Error(`Brevo API error ${res.status}: ${err}`)
+  }
+}
 
 function baseTemplate(title: string, content: string): string {
   return `
@@ -68,9 +86,10 @@ export async function sendContactNotification(data: ContactEmailData): Promise<v
     </div>
   `
 
-  await transporter.sendMail({
-    from: `"Web Agropur" <${FROM_EMAIL}>`,
-    to: CONTACT_EMAIL,
+  await sendBrevoEmail({
+    toEmail: CONTACT_EMAIL_TO,
+    fromEmail: CONTACT_EMAIL_FROM,
+    fromName: 'Web Agropur',
     subject: `Nuevo contacto web: ${data.nombre} — ${data.servicio}`,
     html: baseTemplate('Nuevo mensaje de contacto', content),
   })
@@ -111,13 +130,17 @@ export async function sendApplicationNotification(data: ApplicationEmailData): P
     `}
   `
 
-  await transporter.sendMail({
-    from: `"Web Agropur" <${FROM_EMAIL}>`,
-    to: JOB_EMAIL,
+  await sendBrevoEmail({
+    toEmail: JOB_EMAIL,
+    fromEmail: CONTACT_EMAIL_FROM,
+    fromName: 'Web Agropur',
     subject: `Nueva candidatura: ${data.nombre} — ${data.perfil}`,
     html: baseTemplate('Nueva candidatura recibida', content),
-    attachments: data.cvBuffer
-      ? [{ filename: data.cvFilename || 'curriculum.pdf', content: data.cvBuffer, contentType: 'application/pdf' }]
-      : [],
+    attachment: data.cvBuffer
+      ? {
+          name: data.cvFilename || 'curriculum.pdf',
+          content: data.cvBuffer.toString('base64'),
+        }
+      : undefined,
   })
 }

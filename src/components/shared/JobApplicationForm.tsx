@@ -15,6 +15,26 @@ const profiles = [
   'Otro',
 ]
 
+const SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void
+      execute: (siteKey: string, options: { action: string }) => Promise<string>
+    }
+  }
+}
+
+async function getRecaptchaToken(action: string): Promise<string | null> {
+  if (!SITE_KEY || typeof window.grecaptcha === 'undefined') return null
+  return new Promise((resolve) => {
+    window.grecaptcha.ready(() => {
+      window.grecaptcha.execute(SITE_KEY, { action }).then(resolve).catch(() => resolve(null))
+    })
+  })
+}
+
 export default function JobApplicationForm(): JSX.Element {
   const [formData, setFormData] = useState({
     nombre: '',
@@ -51,6 +71,8 @@ export default function JobApplicationForm(): JSX.Element {
 
     setStatus('loading')
 
+    const recaptchaToken = await getRecaptchaToken('apply')
+
     const fd = new FormData()
     fd.append('nombre', formData.nombre)
     fd.append('email', formData.email)
@@ -58,6 +80,7 @@ export default function JobApplicationForm(): JSX.Element {
     fd.append('perfil', formData.perfil)
     fd.append('experiencia', formData.experiencia)
     fd.append('lopd', formData.lopd ? 'true' : 'false')
+    if (recaptchaToken) fd.append('recaptchaToken', recaptchaToken)
     if (cvFile) fd.append('cv', cvFile)
 
     try {
@@ -131,9 +154,14 @@ export default function JobApplicationForm(): JSX.Element {
 
   return (
     <form onSubmit={handleSubmit} noValidate class="space-y-5 bg-white rounded-xl p-6 lg:p-8 shadow-sm border border-gray-200">
-      {status === 'error' && (
+      {status === 'error' && !errors.general && (
         <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-700">
           Ha ocurrido un error. Por favor, inténtalo de nuevo.
+        </div>
+      )}
+      {errors.general && (
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-700">
+          {errors.general}
         </div>
       )}
 
@@ -218,6 +246,10 @@ export default function JobApplicationForm(): JSX.Element {
       >
         {status === 'loading' ? 'Enviando...' : 'Enviar candidatura'}
       </button>
+
+      <p class="text-xs text-gray-400 text-center">
+        Este sitio está protegido por reCAPTCHA.
+      </p>
     </form>
   )
 }
