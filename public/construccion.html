@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Próximamente — Agropur Centro Gestor S.L.</title>
+  <meta name="description" content="Estamos trabajando para ofrecerte una nueva versión de nuestra web. Volvemos pronto." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/jpeg" href="/logo-agropur.jpeg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1f2937;
+      background-color: #f4f6f3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3 { font-family: 'Raleway', sans-serif; }
+
+    /* Main */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 1rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      max-width: 540px;
+      width: 100%;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .logo-wrap {
+      padding: 2.5rem 2rem 2rem;
+    }
+
+    .logo {
+      max-width: min(18rem, 80%);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .card-body {
+      padding: 0 2rem 2.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .logo-wrap { padding: 2rem 1.5rem 1.75rem; }
+      .card-body { padding: 0 1.5rem 2rem; }
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      background-color: #dcfce7;
+      color: #16a34a;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.01em;
+    }
+    .badge-dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background-color: #16a34a;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: #1a3317;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    h1 span {
+      color: #1a5fa8;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #6b7280;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.75rem;
+      background-color: #1a5fa8;
+      color: #fff;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(26,95,168,0.25);
+    }
+    .btn-primary:hover {
+      background-color: #0f4a8a;
+      box-shadow: 0 4px 14px rgba(26,95,168,0.35);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 2rem 0;
+    }
+
+    .contact-info {
+      font-size: 0.875rem;
+      color: #6b7280;
+      line-height: 1.9;
+    }
+    .contact-info strong {
+      color: #1f2937;
+      font-weight: 500;
+    }
+    .contact-info a {
+      color: #1a5fa8;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <div class="card">
+
+      <div class="logo-wrap">
+        <img src="/logo-vect.jpeg" alt="Agropur Centro Gestor S.L." class="logo" />
+      </div>
+
+      <div class="card-body">
+
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Página en construcción
+      </div>
+
+      <h1>
+        Estamos trabajando<br />
+        <span>en nuestra nueva web.</span>
+      </h1>
+
+      <p class="subtitle">
+        Pronto tendrás acceso a toda la información sobre nuestros servicios de gestión de purines en Aragón y Navarra.<br />Mientras tanto, puedes contactar con nosotros directamente.
+      </p>
+
+      <a href="mailto:info@agropur.es" class="btn-primary">
+        Contactar con nosotros
+      </a>
+
+      <hr />
+
+      <div class="contact-info">
+        <p><strong>Agropur Centro Gestor S.L.</strong></p>
+        <p>
+          <a href="tel:+34617906103">+34 617 906 103</a>
+          &nbsp;·&nbsp;
+          <a href="mailto:info@agropur.es">info@agropur.es</a>
+        </p>
+      </div>
+
+      </div><!-- /.card-body -->
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Agropur Centro Gestor S.L. — Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
