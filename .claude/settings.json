@@ -23,7 +23,13 @@
       "Bash(git commit:*)",
       "Bash(npm ls:*)",
       "Bash(node -e \"const v=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\); const arr=JSON.parse\\(v\\); console.log\\(arr.filter\\(x=>x.startsWith\\(''''6.''''\\)\\).slice\\(-5\\).join\\(''''\\\\n''''\\)\\)\")",
-      "Bash(grep -r \"recaptcha\\\\|captcha\\\\|turnstile\\\\|grecaptcha\" /home/ruben/Proyectos/agropur/src --include=*.ts --include=*.tsx --include=*.astro)"
+      "Bash(grep -r \"recaptcha\\\\|captcha\\\\|turnstile\\\\|grecaptcha\" /home/ruben/Proyectos/agropur/src --include=*.ts --include=*.tsx --include=*.astro)",
+      "Bash(git rm:*)",
+      "Bash(pip show:*)",
+      "Bash(pip install:*)",
+      "Bash(git-filter-repo --path .vercel --path .astro --invert-paths --force)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)"
     ],
     "additionalDirectories": [
       "/home/ruben/Proyectos/agropur/node_modules"
