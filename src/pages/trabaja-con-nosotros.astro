@@ -5,7 +5,7 @@ import PublicLayout from '../layouts/PublicLayout.astro'
 import JobApplicationForm from '../components/shared/JobApplicationForm.tsx'
 
 const title = 'Trabaja con Nosotros | Empleo en Gestión Agrícola | Agropur'
-const description = 'Agropur está creciendo y busca operarios de maquinaria, técnicos agronómicos y perfiles administrativos en Aragón y Navarra. Empresa estable con trabajo real.'
+const description = 'Agropur busca tractoristas en Villafranca, Ejea y Huesca, administrativo/a en Ejea, y técnico agronómico/ambiental en prácticas. Empresa estable en gestión agrícola.'
 const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
 
 const reasons = [
@@ -18,25 +18,58 @@ const reasons = [
 
 const profiles = [
   {
-    title: 'Operario/a de Maquinaria Agrícola',
+    title: 'Tractorista',
     icon: '🚜',
-    description: 'Buscamos personas con experiencia o formación en maquinaria agrícola, disposición a trabajar en campo y carnet de conducir. Se valorará experiencia con cisternas y equipos de aplicación de purines.',
+    locations: ['Villafranca (Navarra)', 'Ejea de los Caballeros (Zaragoza)', 'Huesca (Huesca)'],
+    locationsLabel: 'Tres ofertas independientes',
+    requirements: [
+      'Experiencia demostrable como tractorista',
+      'Manejo de GPS agrícola',
+      'Uso de PDA o dispositivos digitales',
+      'Carnet de conducir (imprescindible)',
+      'Se valorará formación agraria',
+    ],
+    offers: [
+      'Trabajo estable',
+      'Buenas condiciones salariales según experiencia',
+      'Incorporación inmediata',
+      'Trabajo con maquinaria moderna y tecnología avanzada',
+    ],
+  },
+  {
+    title: 'Administrativo/a',
+    icon: '📋',
+    locations: ['Ejea de los Caballeros (Zaragoza)'],
+    requirements: [
+      'Experiencia en gestión administrativa y contable',
+      'Control de facturación y proveedores',
+      'Manejo de herramientas ofimáticas (Excel, ERP, etc.)',
+      'Se valorará experiencia en el sector agrícola',
+    ],
+    offers: [
+      'Incorporación a empresa consolidada y en crecimiento',
+      'Estabilidad laboral',
+      'Buen ambiente de trabajo',
+      'Posibilidades de desarrollo profesional',
+    ],
   },
   {
     title: 'Técnico/a Agronómico o Ambiental',
     icon: '🔬',
-    description: 'Titulación en Ingeniería Agronómica, Ciencias Ambientales o similar. Capacidad para elaborar planes de fertilización e interpretar análisis de laboratorio.',
-  },
-  {
-    title: 'Administrativo/a con Conocimiento del Sector',
-    icon: '📋',
-    description: 'Persona organizada, manejo de herramientas ofimáticas y capacidad para gestionar documentación oficial. Se valorará conocimiento del sector ganadero.',
-  },
-  {
-    title: 'Perfil Junior con Ganas de Aprender',
-    icon: '🌱',
-    description: 'No tienes experiencia pero tienes ganas de trabajar en el campo y aprender. En Agropur formamos a las personas con potencial.',
-    badge: true,
+    badge: 'Contrato de prácticas',
+    locations: ['Ejea de los Caballeros (Zaragoza)'],
+    requirements: [
+      'Titulación en Ingeniería Agronómica, Ciencias Ambientales o similar',
+      'Capacidad para elaborar planes de fertilización',
+      'Interpretación de análisis de laboratorio',
+      'Ganas de aprender en un entorno real',
+    ],
+    offers: [
+      'Contrato de prácticas remunerado',
+      'Mentoring directo con equipo técnico',
+      'Incorporación a proyecto en crecimiento',
+      'Posibilidad de continuidad',
+    ],
   },
 ]
 
@@ -123,16 +156,62 @@ const steps = [
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {profiles.map((profile, i) => (
-          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 relative" data-aos="fade-up" data-aos-delay={i * 100}>
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 relative flex flex-col" data-aos="fade-up" data-aos-delay={i * 100}>
             {profile.badge && (
-              <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-innovation-light text-innovation text-xs font-bold uppercase">
-                Sin experiencia OK
+              <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-primary/10 text-green-primary text-xs font-bold uppercase">
+                {profile.badge}
               </span>
             )}
             <div class="text-4xl mb-3">{profile.icon}</div>
-            <h3 class="text-lg font-heading font-semibold text-black-soft mb-2">{profile.title}</h3>
-            <p class="text-sm text-gray-mid leading-relaxed mb-4">{profile.description}</p>
-            <a href="#formulario" class="text-sm font-medium text-blue-accent hover:underline">
+            <h3 class="text-xl font-heading font-bold text-black-soft mb-2">{profile.title}</h3>
+
+            {/* Ubicaciones */}
+            <div class="flex flex-wrap gap-2 mb-4">
+              {profile.locationsLabel && (
+                <span class="text-xs text-blue-accent font-semibold uppercase tracking-wide w-full">{profile.locationsLabel}</span>
+              )}
+              {profile.locations.map((loc) => (
+                <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-brand rounded text-xs text-gray-dark">
+                  <svg class="w-3 h-3 text-green-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                  </svg>
+                  {loc}
+                </span>
+              ))}
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5 flex-1">
+              {/* Requisitos */}
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wide text-gray-mid mb-2">Requisitos</h4>
+                <ul class="space-y-1">
+                  {profile.requirements.map((req) => (
+                    <li class="flex items-start gap-1.5 text-xs text-gray-dark">
+                      <svg class="w-3.5 h-3.5 text-green-primary flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      {req}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {/* Ofrecemos */}
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wide text-gray-mid mb-2">Ofrecemos</h4>
+                <ul class="space-y-1">
+                  {profile.offers.map((offer) => (
+                    <li class="flex items-start gap-1.5 text-xs text-gray-dark">
+                      <svg class="w-3.5 h-3.5 text-blue-accent flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      {offer}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <a href="#formulario" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-accent hover:underline mt-auto">
               Me interesa →
             </a>
           </div>

@@ -8,10 +8,9 @@ interface FormErrors {
 type FormStatus = 'idle' | 'loading' | 'success' | 'error'
 
 const profiles = [
-  'Operario/a de Maquinaria Agrícola',
-  'Técnico/a Agronómico o Ambiental',
-  'Administrativo/a con Conocimiento del Sector',
-  'Perfil Junior con Ganas de Aprender',
+  'Tractorista',
+  'Administrativo/a',
+  'Técnico/a Agronómico o Ambiental (prácticas)',
   'Otro',
 ]
 
