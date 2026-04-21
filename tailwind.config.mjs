@@ -12,7 +12,7 @@ export default {
         'blue-dark': '#0f3d70',
         'gray-brand': '#f4f6f3',
         'gray-mid': '#6b7280',
-        'gray-dark': '#1f2937',
+        'gray-dark': '#2d3748',
         'black-soft': '#111827',
         'innovation': '#16a34a',
         'innovation-light': '#dcfce7',
