@@ -32,7 +32,8 @@
       "Bash(git push:*)",
       "Bash(convert --version)",
       "Bash(identify /home/ruben/Proyectos/agropur/public/images/app.jpeg)",
-      "Bash(convert /home/ruben/Proyectos/agropur/public/images/app.jpeg -fuzz 18% -fill none -draw 'color 0,0 floodfill' -fill none -draw 'color 1128,0 floodfill' -fill none -draw 'color 0,1128 floodfill' -fill none -draw 'color 1128,1128 floodfill' /home/ruben/Proyectos/agropur/public/images/app.png)"
+      "Bash(convert /home/ruben/Proyectos/agropur/public/images/app.jpeg -fuzz 18% -fill none -draw 'color 0,0 floodfill' -fill none -draw 'color 1128,0 floodfill' -fill none -draw 'color 0,1128 floodfill' -fill none -draw 'color 1128,1128 floodfill' /home/ruben/Proyectos/agropur/public/images/app.png)",
+      "Bash(magick /home/ruben/Proyectos/agropur/public/images/app.jpeg -fuzz 12% -fill none -draw 'color 0,0 floodfill' -draw 'color 1128,0 floodfill' -draw 'color 0,1128 floodfill' -draw 'color 1128,1128 floodfill' -draw 'color 564,0 floodfill' -draw 'color 564,1128 floodfill' -draw 'color 0,564 floodfill' -draw 'color 1128,564 floodfill' /home/ruben/Proyectos/agropur/public/images/app_test.png)"
     ],
     "additionalDirectories": [
       "/home/ruben/Proyectos/agropur/node_modules"
