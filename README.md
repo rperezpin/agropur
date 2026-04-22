@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-Web corporativa profesional para **Agropur Centro Gestor S.L.**, empresa especializada en la gestión integral de purines y deyecciones porcinas con sede en Ejea de los Caballeros (Zaragoza), operando en las comarcas de Hoya de Huesca, Cinco Villas y Ribera Alta de Navarra.
+Web corporativa profesional para **Agropur Centro Gestor S.L.**, empresa especializada en la gestión integral de purines y deyecciones porcinas con sede en Ejea de los Caballeros (Zaragoza), operando en las comarcas de Hoya de Huesca, Cinco Villas y Ribera de Navarra.
 
 **Objetivos estratégicos:**
 1. **Imagen corporativa profesional y de confianza** — seriedad, experiencia y liderazgo sectorial.

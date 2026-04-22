@@ -41,7 +41,7 @@ En `BaseLayout.astro`, el `<head>` debe incluir:
 ### Home (`/`)
 ```
 title:       "Agropur Centro Gestor S.L. | Gestión Integral de Purines en Aragón y Navarra"
-description: "Empresa especializada en gestión colectiva de purines, digestato y deyecciones porcinas en Hoya de Huesca, Cinco Villas y Ribera Alta de Navarra. Registro SANDACH ESP22125010."
+description: "Empresa especializada en gestión colectiva de purines, digestato y deyecciones porcinas en Hoya de Huesca, Cinco Villas y Ribera de Navarra. Registro SANDACH ESP22125010."
 ```
 
 ### Servicios (`/servicios`)
@@ -97,7 +97,7 @@ Añadir en `BaseLayout.astro` de forma condicional, o en cada página directamen
     "addressRegion": "Zaragoza",
     "addressCountry": "ES"
   },
-  "areaServed": ["Hoya de Huesca", "Cinco Villas", "Ribera Alta de Navarra"],
+  "areaServed": ["Hoya de Huesca", "Cinco Villas", "Ribera de Navarra"],
   "sameAs": ["https://www.linkedin.com/company/agropur-centro-gestor-s-l-"]
 }
 ```

@@ -23,14 +23,14 @@ CTA Header: `Solicitar información`
 
 ### Métricas (StatsBar)
 - `+8 años` — De experiencia en el sector
-- `3 comarcas` — Hoya de Huesca, Cinco Villas, Ribera Alta de Navarra
+- `3 comarcas` — Hoya de Huesca, Cinco Villas, Ribera de Navarra
 - `Registro oficial` — SANDACH ESP22125010
 - `Tecnología avanzada` — Tubos colgantes de última generación
 
 ### Quiénes Somos
 **Título:** Empresa de confianza en la gestión de purines
 **Texto:**
-Somos Agropur Centro Gestor S.L., una empresa especializada en la gestión colectiva y transporte de purines usando los sistemas más novedosos del mercado. Operamos en las comarcas de Hoya de Huesca, Cinco Villas y Ribera Alta de Navarra, ofreciendo un servicio integral que cubre desde el acuerdo con la granja hasta el análisis, transporte y aplicación en campo.
+Somos Agropur Centro Gestor S.L., una empresa especializada en la gestión colectiva y transporte de purines usando los sistemas más novedosos del mercado. Operamos en las comarcas de Hoya de Huesca, Cinco Villas y Ribera de Navarra, ofreciendo un servicio integral que cubre desde el acuerdo con la granja hasta el análisis, transporte y aplicación en campo.
 
 ### Grid de Servicios
 **Título:** Nuestros Servicios
@@ -132,7 +132,7 @@ El digestato forma parte de la economía circular agrícola: los residuos de la 
 **Título página:** Sobre Agropur
 
 ### Historia
-Agropur Centro Gestor S.L. nació en 2016 con un objetivo claro: ofrecer a ganaderos y agricultores de Aragón y Navarra una solución profesional, legal y eficiente para la gestión colectiva de purines. Lo que comenzó como una iniciativa local ha crecido hasta convertirse en un servicio de referencia en las comarcas de Hoya de Huesca, Cinco Villas y Ribera Alta de Navarra.
+Agropur Centro Gestor S.L. nació en 2016 con un objetivo claro: ofrecer a ganaderos y agricultores de Aragón y Navarra una solución profesional, legal y eficiente para la gestión colectiva de purines. Lo que comenzó como una iniciativa local ha crecido hasta convertirse en un servicio de referencia en las comarcas de Hoya de Huesca, Cinco Villas y Ribera de Navarra.
 
 ### Misión
 Gestionar las deyecciones porcinas de forma integral, eficiente y respetuosa con el medio ambiente, siendo un aliado de confianza para ganaderos y agricultores.

@@ -1,37 +1,43 @@
 ---
-export const prerender = true
+export const prerender = true;
 
-import PublicLayout from '../layouts/PublicLayout.astro'
-import Hero from '../components/home/Hero.astro'
-import StatsBar from '../components/home/StatsBar.astro'
-import ServicesGrid from '../components/home/ServicesGrid.astro'
-import DigestatoTeaser from '../components/home/DigestatoTeaser.astro'
-import WhyAgropur from '../components/home/WhyAgropur.astro'
-import GeographyBlock from '../components/home/GeographyBlock.astro'
-import HomeCTA from '../components/home/HomeCTA.astro'
+import PublicLayout from "../layouts/PublicLayout.astro";
+import Hero from "../components/home/Hero.astro";
+import StatsBar from "../components/home/StatsBar.astro";
+import ServicesGrid from "../components/home/ServicesGrid.astro";
+import DigestatoTeaser from "../components/home/DigestatoTeaser.astro";
+import WhyAgropur from "../components/home/WhyAgropur.astro";
+import GeographyBlock from "../components/home/GeographyBlock.astro";
+import HomeCTA from "../components/home/HomeCTA.astro";
 
-const title = 'Agropur Centro Gestor S.L. | Gestión Integral de Purines en Aragón y Navarra'
-const description = 'Empresa especializada en gestión colectiva de purines, digestato y deyecciones porcinas en Hoya de Huesca, Cinco Villas y Ribera Alta de Navarra. Registro SANDACH S50095004.'
+const title =
+  "Agropur Centro Gestor S.L. | Gestión Integral de Purines en Aragón y Navarra";
+const description =
+  "Empresa especializada en gestión colectiva de purines, digestato y deyecciones porcinas en Hoya de Huesca, Cinco Villas y Ribera de Navarra. Registro SANDACH S50095004.";
 ---
 
 <PublicLayout title={title} description={description}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": ["Organization", "LocalBusiness"],
-      "name": "Agropur Centro Gestor S.L.",
-      "description": "Gestión colectiva de purines y digestato en Aragón y Navarra",
-      "url": "https://www.agropur.es",
-      "logo": "https://www.agropur.es/logo-agropur.jpeg",
-      "foundingDate": "2016",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Ejea de los Caballeros",
-        "addressRegion": "Zaragoza",
-        "addressCountry": "ES"
-      },
-      "areaServed": ["Hoya de Huesca", "Cinco Villas", "Ribera Alta de Navarra"]
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": ["Organization", "LocalBusiness"],
+        name: "Agropur Centro Gestor S.L.",
+        description:
+          "Gestión colectiva de purines y digestato en Aragón y Navarra",
+        url: "https://www.agropur.es",
+        logo: "https://www.agropur.es/logo-agropur.jpeg",
+        foundingDate: "2016",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Ejea de los Caballeros",
+          addressRegion: "Zaragoza",
+          addressCountry: "ES",
+        },
+        areaServed: ["Hoya de Huesca", "Cinco Villas", "Ribera de Navarra"],
+      })}
+    />
   </Fragment>
 
   <Hero />

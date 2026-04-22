@@ -75,7 +75,7 @@ const services = [
       'Trazabilidad completa de cada movimiento de purín',
       'Datos exportables para auditorías e inspecciones',
     ],
-    image: '/images/app.png',
+    image: '/images/app.jpeg',
     imageAlt: 'Plataforma de trazabilidad GPS en tiempo real para gestión de purines',
     reverse: false,
   },
@@ -148,7 +148,7 @@ const services = [
               <img
                 src={service.image}
                 alt={service.imageAlt}
-                class="w-full max-w-sm rounded-2xl shadow-md object-cover aspect-[4/3]"
+                class={`w-full rounded-2xl shadow-md ${service.id === 'gps' ? 'max-w-lg' : 'max-w-sm object-cover aspect-[4/3]'}`}
                 loading="lazy"
               />
             ) : (
