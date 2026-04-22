@@ -10,18 +10,18 @@
   /*
    * Fronteras compartidas (puntos idénticos en ambos polígonos):
    *
-   * B1 — Rivera Alta (E) / Cinco Villas (NO):
+   * B1 — Ribera Alta (E) / Cinco Villas (NO):
    *   [42.60,-1.20] → [42.48,-1.25] → [42.35,-1.30]
    *
    * B2 — Cinco Villas (E) / Hoya de Huesca (O):
    *   [42.62,-0.82] → [42.40,-0.78] → [42.10,-0.76] → [41.90,-0.78]
    */
 
-  /* ── Rivera Alta de Navarra ──────────────────────────────────────────
+  /* ── Ribera Alta de Navarra ──────────────────────────────────────────
    * Zona SW de Navarra. BB: lat 42.35–42.85 | lng -1.65–-1.10
    * Incluye área de Sangüesa, Aoiz y Lumbier.
    * ──────────────────────────────────────────────────────────────────*/
-  const riveraAlta = [
+  const riberaAlta = [
     [42.85, -1.62], [42.85, -1.12],
     /* B1 ↓ borde E (compartido con Cinco Villas) */
     [42.60, -1.20], [42.48, -1.25], [42.35, -1.30],
@@ -33,7 +33,7 @@
    * Alargada N-S; estrecha al N (montaña), ancha al S (Ebro).
    * ──────────────────────────────────────────────────────────────────*/
   const cincoVillas = [
-    /* B1 ↑ borde NO (compartido con Rivera Alta) */
+    /* B1 ↑ borde NO (compartido con Ribera Alta) */
     [42.35, -1.30], [42.48, -1.25], [42.60, -1.20],
     /* cima estrecha → NE */
     [42.62, -0.82],
@@ -65,7 +65,7 @@
   const estilo = {
     cincoVillas: { color: '#155a2c', weight: 2, opacity: 1, fillColor: '#3a8a58', fillOpacity: 0.42 },
     hoyaHuesca:  { color: '#1a6b38', weight: 2, opacity: 1, fillColor: '#68b88a', fillOpacity: 0.38 },
-    riveraAlta:  { color: '#0e3d22', weight: 2, opacity: 1, fillColor: '#1e6040', fillOpacity: 0.50 },
+    riberaAlta:  { color: '#0e3d22', weight: 2, opacity: 1, fillColor: '#1e6040', fillOpacity: 0.50 },
   };
 
   function labelIcon(name, sub) {
@@ -91,8 +91,8 @@
     }).addTo(map);
 
     /* Polígonos */
-    L.polygon(riveraAlta, estilo.riveraAlta)
-      .bindTooltip('<b>Rivera Alta de Navarra</b><br><small>Comunidad Foral de Navarra</small>', { sticky: true, className: 'comarca-tooltip' })
+    L.polygon(riberaAlta, estilo.riberaAlta)
+      .bindTooltip('<b>Ribera Alta de Navarra</b><br><small>Comunidad Foral de Navarra</small>', { sticky: true, className: 'comarca-tooltip' })
       .addTo(map);
 
     L.polygon(cincoVillas, estilo.cincoVillas)
@@ -104,7 +104,7 @@
       .addTo(map);
 
     /* Etiquetas permanentes */
-    L.marker([42.60, -1.40], { icon: labelIcon('Rivera Alta', 'de Navarra'),    interactive: false }).addTo(map);
+    L.marker([42.60, -1.40], { icon: labelIcon('Ribera Alta', 'de Navarra'),    interactive: false }).addTo(map);
     L.marker([42.18, -1.10], { icon: labelIcon('Cinco Villas', 'Prov. Zaragoza'), interactive: false }).addTo(map);
     L.marker([42.22, -0.40], { icon: labelIcon('Hoya de Huesca', 'Prov. Huesca'), interactive: false }).addTo(map);
 
