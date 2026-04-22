@@ -29,7 +29,10 @@
       "Bash(pip install:*)",
       "Bash(git-filter-repo --path .vercel --path .astro --invert-paths --force)",
       "Bash(git remote:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(convert --version)",
+      "Bash(identify /home/ruben/Proyectos/agropur/public/images/app.jpeg)",
+      "Bash(convert /home/ruben/Proyectos/agropur/public/images/app.jpeg -fuzz 18% -fill none -draw 'color 0,0 floodfill' -fill none -draw 'color 1128,0 floodfill' -fill none -draw 'color 0,1128 floodfill' -fill none -draw 'color 1128,1128 floodfill' /home/ruben/Proyectos/agropur/public/images/app.png)"
     ],
     "additionalDirectories": [
       "/home/ruben/Proyectos/agropur/node_modules"
