@@ -1,4 +1,6 @@
 ---
+import CookieBanner from '../components/shared/CookieBanner.tsx'
+
 interface Props {
   title: string
   description: string
@@ -87,5 +89,8 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href
         delay: 0,
       })
     </script>
+    
+    <!-- Cookie Banner -->
+    <CookieBanner client:load />
   </body>
 </html>
