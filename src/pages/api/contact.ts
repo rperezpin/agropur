@@ -10,7 +10,7 @@ const contactSchema = z.object({
   telefono: z.string().min(6, 'El teléfono es obligatorio'),
   servicio: z.string().min(1, 'Selecciona un servicio'),
   mensaje: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres'),
-  recaptchaToken: z.string().optional(),
+  recaptchaToken: z.union([z.string(), z.null()]).optional(),
 })
 
 export const POST: APIRoute = async ({ request }) => {
