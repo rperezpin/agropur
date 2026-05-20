@@ -6,6 +6,16 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
 Sitemap: ${new URL('sitemap-index.xml', import.meta.env.SITE || 'https://www.agropur.es').href}
 `.trim()
 
