@@ -2,7 +2,7 @@
 export const prerender = true
 
 import PublicLayout from '../layouts/PublicLayout.astro'
-import JobApplicationForm from '../components/shared/JobApplicationForm.tsx'
+import JobApplicationForm from '../components/shared/JobApplicationForm'
 
 const title = 'Trabaja con Nosotros | Empleo en Gestión Agrícola | Agropur'
 const description = 'Agropur busca tractoristas en Villafranca, Ejea y Huesca, administrativo/a en Ejea, y técnico agronómico/ambiental en prácticas. Empresa estable en gestión agrícola.'
@@ -20,6 +20,7 @@ const profiles = [
   {
     title: 'Tractorista',
     icon: '🚜',
+    inactive: true,
     locations: ['Villafranca (Navarra)', 'Ejea de los Caballeros (Zaragoza)', 'Huesca (Huesca)'],
     locationsLabel: 'Tres ofertas independientes',
     requirements: [
@@ -39,6 +40,7 @@ const profiles = [
   {
     title: 'Administrativo/a',
     icon: '📋',
+    inactive: true,
     locations: ['Ejea de los Caballeros (Zaragoza)'],
     requirements: [
       'Experiencia en gestión administrativa y contable',
@@ -113,14 +115,14 @@ const steps = [
     <div class="absolute inset-0 bg-green-primary/10 pointer-events-none"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-6" data-aos="fade-up">
-        Tenemos trabajo.
-        <span class="block text-green-mid">Necesitamos personas.</span>
+        Forma parte
+        <span class="block text-green-mid">del equipo Agropur.</span>
       </h1>
       <p class="text-lg sm:text-xl text-white/85 max-w-2xl mb-8" data-aos="fade-up" data-aos-delay="100">
-        Agropur está creciendo y buscamos personas comprometidas que quieran formar parte de un proyecto real, con trabajo estable y futuro en el sector.
+        Ahora mismo no tenemos vacantes activas, pero seguimos creciendo. Si quieres trabajar con nosotros, envíanos tu CV y te avisamos cuando surja una oportunidad.
       </p>
-      <a href="#perfiles" class="inline-flex items-center px-8 py-4 bg-white text-blue-dark font-semibold rounded-lg hover:bg-gray-brand transition-all shadow-lg" data-aos="fade-up" data-aos-delay="200">
-        Ver perfiles abiertos ↓
+      <a href="#formulario" class="inline-flex items-center px-8 py-4 bg-white text-blue-dark font-semibold rounded-lg hover:bg-gray-brand transition-all shadow-lg" data-aos="fade-up" data-aos-delay="200">
+        Enviar mi CV ↓
       </a>
     </div>
   </section>
@@ -151,13 +153,28 @@ const steps = [
   <!-- Open Profiles -->
   <section id="perfiles" class="py-16 lg:py-20 bg-gray-brand">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
-        Perfiles abiertos
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-4" data-aos="fade-up">
+        Vacantes
       </h2>
+      <!-- No active vacancies notice -->
+      <div class="max-w-2xl mx-auto mb-10 bg-amber-50 border border-amber-200 rounded-xl px-6 py-4 flex gap-3 items-start" data-aos="fade-up" data-aos-delay="100">
+        <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <p class="text-amber-800 font-semibold text-sm">Actualmente no tenemos vacantes activas.</p>
+          <p class="text-amber-700 text-sm mt-0.5">Si te interesa trabajar con nosotros, envíanos tu CV y te tendremos en cuenta para futuras oportunidades.</p>
+        </div>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {profiles.map((profile, i) => (
-          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 relative flex flex-col" data-aos="fade-up" data-aos-delay={i * 100}>
-            {profile.badge && (
+          <div class={`bg-white rounded-xl p-6 shadow-sm border relative flex flex-col ${profile.inactive ? 'border-gray-200 opacity-60' : 'border-gray-200'}`} data-aos="fade-up" data-aos-delay={i * 100}>
+            {profile.inactive && (
+              <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-gray-200 text-gray-500 text-xs font-bold uppercase">
+                Vacante no activa
+              </span>
+            )}
+            {!profile.inactive && profile.badge && (
               <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-green-primary/10 text-green-primary text-xs font-bold uppercase">
                 {profile.badge}
               </span>
@@ -211,9 +228,15 @@ const steps = [
               </div>
             </div>
 
-            <a href="#formulario" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-accent hover:underline mt-auto">
-              Me interesa →
-            </a>
+            {profile.inactive ? (
+              <a href="#formulario" class="inline-flex items-center gap-1 text-sm font-semibold text-gray-400 hover:underline mt-auto">
+                Enviar CV para futuras oportunidades →
+              </a>
+            ) : (
+              <a href="#formulario" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-accent hover:underline mt-auto">
+                Me interesa →
+              </a>
+            )}
           </div>
         ))}
       </div>
@@ -249,10 +272,10 @@ const steps = [
   <section id="formulario" class="py-16 lg:py-20 bg-gray-brand">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-4" data-aos="fade-up">
-        Envía tu candidatura
+        Envía tu CV
       </h2>
       <p class="text-gray-mid text-center mb-8" data-aos="fade-up" data-aos-delay="100">
-        Rellena el formulario y adjunta tu CV en PDF.
+        No hay vacantes activas ahora mismo, pero guardamos tu CV y te contactamos en cuanto surja una oportunidad que encaje con tu perfil.
       </p>
       <div data-aos="fade-up" data-aos-delay="200">
         <JobApplicationForm client:visible />
@@ -266,6 +289,25 @@ const steps = [
       <p class="text-lg text-gray-dark italic" data-aos="fade-up">
         ¿No encajas en ninguno de los perfiles? Mándanos tu CV igualmente. Si tienes ganas de trabajar con nosotros, buscamos la manera.
       </p>
+    </div>
+  </section>
+
+  <!-- Empresas Colaboradoras -->
+  <section class="py-16 bg-gray-brand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-heading font-semibold text-green-primary text-center mb-10" data-aos="fade-up">
+        Empresas Colaboradoras
+      </h2>
+      <div class="flex justify-center items-center" data-aos="fade-up" data-aos-delay="100">
+        <a href="http://www.triskel-telecom.com/" target="_blank" rel="noopener noreferrer" class="group">
+          <img
+            src="/images/triskel-logo.png"
+            alt="Triskel Telecom SL"
+            class="h-24 w-auto grayscale group-hover:grayscale-0 transition-all duration-300 hover:scale-105"
+            loading="lazy"
+          />
+        </a>
+      </div>
     </div>
   </section>
 </PublicLayout>

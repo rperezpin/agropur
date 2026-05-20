@@ -14,12 +14,12 @@ const services = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>`,
     description: 'Si tienes una explotación porcina, nos encargamos de que la gestión de tus purines cumpla toda la normativa vigente con el mínimo esfuerzo de tu parte.',
     features: [
-      'Contrato anual para la gestión integral de purín',
+      'Contrato para la gestión integral de purín',
       'Emisión de certificados oficiales de gestión',
       'Estudio de gestión eficiente del agua',
       'Tramitación de toda la documentación necesaria',
     ],
-    image: '/images/4.jpeg',
+    image: '/images/balsa.jpeg',
     imageAlt: 'Cuba de purín en explotación porcina',
     reverse: false,
   },
@@ -45,7 +45,7 @@ const services = [
     description: 'Recibe el purín directamente en tu parcela y conviértelo en el fertilizante orgánico que tu cultivo necesita.',
     features: [
       'Transporte directo granja-agricultor',
-      'Aplicación con sistema de tubos colgantes',
+      'Aplicación con sistema de distribución con la normativa vigente',
       'Anchos de trabajo: 9 metros, 15 metros y 18 metros',
       'Plan de fertilización con purines personalizado',
     ],
@@ -72,7 +72,7 @@ const services = [
     id: 'gps',
     title: 'Trazabilidad GPS',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>`,
-    description: 'Todos nuestros tractores y cisternas cuentan con sistemas GPS en tiempo real. Sabemos exactamente qué máquina está en cada parcela, cuándo llegó y cuánto purín aplicó.',
+    description: 'Nuestros tractores y cisternas cuentan con sistemas GPS de <a href="http://www.triskel-telecom.com/" target="_blank" class="text-blue-accent hover:underline">TRISKEL</a> en tiempo real. Sabemos exactamente qué máquina está en cada parcela, cuándo llegó y cuánto purín aplicó.',
     features: [
       'Geolocalización en tiempo real de toda la maquinaria',
       'Registro automático de parcelas trabajadas y tiempos de aplicación',
@@ -135,7 +135,7 @@ const services = [
                 {service.title}
               </h2>
             </div>
-            <p class="text-gray-dark leading-relaxed mb-6">{service.description}</p>
+            <p class="text-gray-dark leading-relaxed mb-6" set:html={service.description} />
             <ul class="space-y-3">
               {service.features.map((feature) => (
                 <li class="flex items-start gap-3">
@@ -147,14 +147,21 @@ const services = [
               ))}
             </ul>
           </div>
-          <div class={`flex justify-center ${service.reverse ? 'md:order-1' : ''}`} data-aos={service.reverse ? 'fade-right' : 'fade-left'}>
+          <div class={`flex flex-col justify-center ${service.reverse ? 'md:order-1' : ''}`} data-aos={service.reverse ? 'fade-right' : 'fade-left'}>
             {service.image ? (
-              <img
-                src={service.image}
-                alt={service.imageAlt}
-                class={`w-full rounded-2xl shadow-md ${service.id === 'gps' ? 'max-w-lg' : 'max-w-sm object-cover aspect-[4/3]'}`}
-                loading="lazy"
-              />
+              <div class={`overflow-hidden rounded-2xl shadow-md ${service.id === 'gps' ? 'max-w-lg w-full' : 'max-w-sm w-full'}`}>
+                <img
+                  src={service.image}
+                  alt={service.imageAlt}
+                  class={`w-full hover:scale-110 transition-transform duration-500 ${service.id === 'gps' ? '' : 'object-cover aspect-[4/3]'}`}
+                  loading="lazy"
+                />
+                {service.id === 'gps' && (
+                  <p class="text-xs text-gray-mid mt-3 text-center px-2">
+                    Imagen correspondiente a la plataforma TK-Artic de Triskel Telecom SL
+                  </p>
+                )}
+              </div>
             ) : (
               <div class="w-full max-w-sm bg-green-primary/8 rounded-2xl p-10 flex items-center justify-center min-h-[250px]">
                 <div class="text-green-primary/30" set:html={service.icon.replace('w-10 h-10', 'w-24 h-24')} />

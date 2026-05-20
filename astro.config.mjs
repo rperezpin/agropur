@@ -1,12 +1,14 @@
 import { defineConfig } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 import preact from '@astrojs/preact'
-import vercel from '@astrojs/vercel'
+import node from '@astrojs/node'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
   output: 'server',
-  adapter: vercel(),
+  adapter: node({
+    mode: 'standalone',
+  }),
   integrations: [
     tailwind(),
     preact({ compat: true }),

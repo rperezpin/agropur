@@ -3,7 +3,7 @@ export const prerender = true
 
 import PublicLayout from '../layouts/PublicLayout.astro'
 import PageHero from '../components/shared/PageHero.astro'
-import ContactForm from '../components/shared/ContactForm.tsx'
+import ContactForm from '../components/shared/ContactForm'
 
 const title = 'Contacto | Agropur Centro Gestor S.L. — Ejea de los Caballeros'
 const description = 'Contacta con Agropur para gestión de purines, digestato y servicios agronómicos en Aragón y Navarra.'
@@ -102,8 +102,7 @@ const recaptchaSiteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY
               </svg>
               <div>
                 <p class="font-semibold text-black-soft">Horario</p>
-                <p class="text-gray-mid">Lunes a Viernes: 8:00–18:00</p>
-                <p class="text-gray-mid">Sábados: 9:00–13:00 (campaña)</p>
+                <p class="text-gray-mid">Lunes a Viernes: 8:00–15:00</p>                
               </div>
             </div>
           </div>
